@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<app:application xmlns:app="http://www.tmax.co.kr/proobject/application">
+  <app:application-name>SoApp</app:application-name>
+  <app:version>0</app:version>
+  <app:servicegroups>
+    <app:servicegroup-name>SG_EG</app:servicegroup-name>
+  </app:servicegroups>
+  <app:dbio-config>
+    <table-history-merge>NONE</table-history-merge>
+    <page-query-enabled>true</page-query-enabled>
+  </app:dbio-config>
+  <app:batch-config>
+    <app:environment>
+      <app:enable-jndi-lookup>false</app:enable-jndi-lookup>
+      <app:database-name>db2</app:database-name>
+      <app:jdbc-provider-url>jdbc:db2://192.168.56.1:25000/db2user</app:jdbc-provider-url>
+      <app:user-name>db2user</app:user-name>
+      <app:password>db2user</app:password>
+      <app:driver-class-name>com.ibm.db2.jcc.DB2Driver</app:driver-class-name>
+    </app:environment>
+  </app:batch-config>
+</app:application>

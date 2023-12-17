@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sg:servicegroup xmlns:sg="http://www.tmax.co.kr/proobject/servicegroup" applicationName="SoApp" resourcePackage="com.tmax.custom.controller" serviceGroupName="SG_EG">
+  <sg:service-resource resourceName="SamplePC" resourcePackage="com.tmax.custom.sample.pc">
+    <sg:service-meta>
+      <sg:service-name>SamplePC_select</sg:service-name>
+      <sg:service-method-name>select</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SamplePC_select"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>SamplePC_insert</sg:service-name>
+      <sg:service-method-name>insert</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SamplePC_insert"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>SamplePC_update</sg:service-name>
+      <sg:service-method-name>update</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SamplePC_update"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>SamplePC_delete</sg:service-name>
+      <sg:service-method-name>delete</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SamplePC_delete"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:call-optimization-disable>false</sg:call-optimization-disable>
+</sg:servicegroup>
