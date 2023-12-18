@@ -1,6 +1,5 @@
 package com.tmax.custom.batch.step;
 
-import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.repeat.RepeatStatus;
@@ -25,6 +24,10 @@ public class SampleBatchInsertStep {
 	@Autowired
 	public StepBuilderFactory stepBuilderFactory;
 	
+	// writed
+	@Autowired
+	public SampleBatchWriter sampleBatchWriter;
+	
 	// reader
 	@Autowired
 	public SampleBatchReader sampleBatchReader;
@@ -32,8 +35,12 @@ public class SampleBatchInsertStep {
 	// processor
 	@Autowired
 	public SampleBatchProcessor sampleBatchProcessor;
-	@Bean
 	
+	@Autowired
+	@Qualifier("SampleBatchDataSourceTransactionManager")
+	private PlatformTransactionManager transactionManager; 
+	
+	@Bean
 	public Step SampleStep() {
 		return stepBuilderFactory.get("SampleStep").tasklet((contribution, chunkContext) -> {
 			 logger.info(">>>>> This is step1");
@@ -42,11 +49,26 @@ public class SampleBatchInsertStep {
 			}).build();
 	}
 	
+	// MyBatis writer 사용
 	@Bean
-	public Step SampleInsertStep(MyBatisBatchItemWriter<Emp> sampleInsert, 
-			@Qualifier("SampleBatchDataSourceTransactionManager") PlatformTransactionManager transactionManager)  throws Exception{
-		return stepBuilderFactory.get("SampleStep").<Emp, Emp>chunk(2).reader(sampleBatchReader.empReader())
-				.processor(sampleBatchProcessor.process()).writer(sampleInsert)
+	public Step SampleInsertStep()  throws Exception{
+		return stepBuilderFactory.get("SampleInsertStep")
+				.<Emp, Emp>chunk(2)
+				.reader(sampleBatchReader.empReader())
+				.processor(sampleBatchProcessor.process())
+				.writer(sampleBatchWriter.empWriter())
+				.transactionManager(transactionManager)
+				.build();
+	}
+	
+	// 커스텀 writer 사용
+	@Bean
+	public Step SampleCustomInsertStep()  throws Exception{
+		return stepBuilderFactory.get("SampleCustomInsertStep")
+				.<Emp, Emp>chunk(2)
+				.reader(sampleBatchReader.empReader())
+				.processor(sampleBatchProcessor.process())
+				.writer(sampleBatchWriter.customWriter())
 				.transactionManager(transactionManager)
 				.build();
 	}

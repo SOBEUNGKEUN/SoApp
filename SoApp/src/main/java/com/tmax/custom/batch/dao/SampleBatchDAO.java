@@ -1,8 +1,10 @@
-//package com.tmax.custom.batch.dao;
-//
-//import org.apache.ibatis.annotations.Mapper;
-//import com.tmax.proobject.service.persistence.ibatis.pageassist.PageMapper;
-//
-//@Mapper
-//public interface SampleBatchDAO extends PageMapper {
-//}
+package com.tmax.custom.batch.dao;
+
+import com.tmax.custom.batch.dto.Emp;
+import com.tmax.custom.datasource.DatabasePO21;
+
+@DatabasePO21
+public interface SampleBatchDAO {
+	public void insert(Emp input) throws Exception;
+	public void delete(Emp input) throws Exception;
+}

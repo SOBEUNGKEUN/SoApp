@@ -12,8 +12,8 @@ import com.tmax.custom.batch.step.SampleBatchDeleteStep;
 import com.tmax.custom.batch.step.SampleBatchInsertStep;
 
 @Configuration
-public class SampleBatchInsertJob {
-	
+public class SampleBatchInsertDelJob {
+
 	@Autowired
 	private JobBuilderFactory jobBuilderFactory;
 	
@@ -26,29 +26,15 @@ public class SampleBatchInsertJob {
 	@Autowired
 	private SampleBatchDeleteStep sampleBatchDeleteStep;
 	
-
 	@Bean
-	public Job SampleInsert() throws Exception {
-		return jobBuilderFactory.get("SampleInsert")
+	public Job SampleInsertDel() throws Exception {
+		return jobBuilderFactory.get("SampleInsertDel")
 				.incrementer(new RunIdIncrementer())
 				.listener(sampleBatchListener)
-				.flow(sampleBatchInsertStep.SampleStep())
-				.next(sampleBatchInsertStep.SampleInsertStep())
+				.flow(sampleBatchInsertStep.SampleInsertStep())
 				.next(sampleBatchDeleteStep.SampleDeleteStep())
 				.end()
 				.build();
 	}
 	
-	
-	@Bean
-	public Job SampleCustomInsert() throws Exception {
-		return jobBuilderFactory.get("SampleCustomInsert")
-				.incrementer(new RunIdIncrementer())
-				.listener(sampleBatchListener)
-				.flow(sampleBatchInsertStep.SampleStep())
-				.next(sampleBatchInsertStep.SampleCustomInsertStep())
-				.next(sampleBatchDeleteStep.SampleDeleteStep())
-				.end()
-				.build();
-	}
 }

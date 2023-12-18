@@ -39,5 +39,17 @@
     </sg:service-meta>
     <sg:exclude-source-generation>false</sg:exclude-source-generation>
   </sg:service-resource>
+  <sg:service-resource resourceName="BatchCall" resourcePackage="com.tmax.custom.batch.service">
+    <sg:service-meta>
+      <sg:service-name>BatchCall_service</sg:service-name>
+      <sg:service-method-name>service</sg:service-method-name>
+      <sg:service-input-type resourceName="BatchTestDTO" resourcePackage="com.tmax.custom.batch.dto" resourcePath="com/tmax/custom/batch/dto"/>
+      <sg:service-output-type resourceName="BatchTestDTO" resourcePackage="com.tmax.custom.batch.dto" resourcePath="com/tmax/custom/batch/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/BatchCall_service"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
   <sg:call-optimization-disable>false</sg:call-optimization-disable>
 </sg:servicegroup>

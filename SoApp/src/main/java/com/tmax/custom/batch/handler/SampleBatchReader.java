@@ -14,7 +14,7 @@ public class SampleBatchReader {
 
 	@Bean
 	public FlatFileItemReader<Emp> empReader() {
-		return new FlatFileItemReaderBuilder<Emp>().name("empItemReader")
+		return new FlatFileItemReaderBuilder<Emp>().name("empReader")
 				.resource(new FileSystemResource("/home/tmax/src/batch/sample-data.csv")).delimited()
 				.names(new String[] {"empno", "ename"}).fieldSetMapper(new BeanWrapperFieldSetMapper<Emp>() {
 					

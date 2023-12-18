@@ -66,7 +66,7 @@ public class SpringBatchConfig {
 	 * MyBatis 사용을 위한 SqlSessionFactoryBean
 	 */
 	@Bean
-	public SqlSessionFactoryBean SampleBatchSqlSessionFactory(@Qualifier("SpringBatchBean") DataSource SpringBatchBean) throws Exception{
+	public SqlSessionFactoryBean SampleBatchSqlSessionFactory(@Qualifier("SampleBatchDataSource") DataSource SpringBatchBean) throws Exception{
 		SqlSessionFactoryBean factoryBean = new ProObjectSqlSessionFactoryBean();
 		factoryBean.setDataSource(SpringBatchBean);
 		factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:com/tmax/custom/batch/dao/*.xml"));
@@ -85,7 +85,7 @@ public class SpringBatchConfig {
 	 * commit, rollback 관리
 	 */
 	@Bean
-	public DataSourceTransactionManager SampleBatchDataSourceTransactionManager(@Qualifier("SpringBatchBean") DataSource SpringBatchBean) {
+	public DataSourceTransactionManager SampleBatchDataSourceTransactionManager(@Qualifier("SampleBatchDataSource") DataSource SpringBatchBean) {
 		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(SpringBatchBean);
 		return transactionManager;
 	}

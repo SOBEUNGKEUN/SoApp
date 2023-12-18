@@ -16,19 +16,18 @@ public class SampleBatchProcessor{
 	@Bean
 	public ItemProcessor<Emp, Emp> process() {
 		
-		return emp -> {
-			Integer empno = emp.getEmpno();
-			String ename = emp.getEname();
+		return input -> {
+			Emp output = new Emp();
+			output.setEmpno(input.getEmpno());
+			output.setEname(input.getEname());
 			
-			Emp transformedEmp = new Emp();
-			transformedEmp.setEmpno(empno);
-			transformedEmp.setEname(ename);
+			Thread.sleep(500);
 			
-			logger.info("Converting (" + emp + ") into (" + transformedEmp + ")");
+			logger.info("Converting (" + input + ") into (" + output + ")");
 			
 			Thread.sleep(2000);
 			
-			return transformedEmp;
+			return output;
 		};
 	}
 }
