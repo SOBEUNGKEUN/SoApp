@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<app:application xmlns:app="http://www.tmax.co.kr/proobject/application">
+<app:application
+    xmlns:app="http://www.tmax.co.kr/proobject/application">
   <app:application-name>SoApp</app:application-name>
   <app:version>0</app:version>
   <app:servicegroups>
     <app:servicegroup-name>SG_EG</app:servicegroup-name>
+    <app:servicegroup-name>SG_CH</app:servicegroup-name>
   </app:servicegroups>
   <app:dbio-config>
     <table-history-merge>NONE</table-history-merge>
