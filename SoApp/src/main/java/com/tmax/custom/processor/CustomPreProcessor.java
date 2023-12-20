@@ -2,9 +2,7 @@ package com.tmax.custom.processor;
 
 import org.springframework.stereotype.Component;
 
-import com.tmax.proobject.core2.exception.NoSuchServiceResourceException;
 import com.tmax.proobject.core2.service.ServiceName;
-import com.tmax.proobject.engine.application.servicegroup.ServiceGroupManager;
 import com.tmax.proobject.model.network.context.RequestContext;
 import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
@@ -18,6 +16,7 @@ import proobject.com.google.gson.JsonObject;
 public class CustomPreProcessor implements PreProcessor{
 	
 	private ProObjectLogger logger = SystemLogger.getLogger();
+	
 	@Override
 	public Object processPreProcess(RequestContext requestContext, ServiceName serviceName, Object object) {
 		// TODO Auto-generated method stub

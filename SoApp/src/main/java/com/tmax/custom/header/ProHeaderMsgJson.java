@@ -16,11 +16,11 @@ import proobject.com.google.gson.stream.JsonToken;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.message.MessageGenerator",
-	date= "23. 12. 18. 오후 7:09"
+	date= "23. 12. 19. 오후 2:00"
 )
 
 @Message
-public class ProHeaderMsgJson extends com.tmax.proobject.model.context.HeaderMsgJson {
+public class ProHeaderMsgJson extends AbstractMessage {
     public byte[] marshal(Object obj) throws MarshalException {
     	ProHeader _ProHeader = (ProHeader)obj;
     	
@@ -65,7 +65,6 @@ public class ProHeaderMsgJson extends com.tmax.proobject.model.context.HeaderMsg
     
     
     public void marshal(com.tmax.custom.header.ProHeader _ProHeader, JsonWriter writer )throws IOException {
-    	super.marshal(_ProHeader, writer);
     
     	writer.name("name"); 
     	if (_ProHeader.getName() != null) {
@@ -223,7 +222,7 @@ public class ProHeaderMsgJson extends com.tmax.proobject.model.context.HeaderMsg
     			break;
     		}	
     		default :
-    		super.setField(dto, reader, name);
+    		reader.skipValue();
     			break;
     	}
     }

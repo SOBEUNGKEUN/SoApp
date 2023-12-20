@@ -8,9 +8,7 @@
     resourcePath="com/tmax/custom/header"
     resourceType="DTO"
     stringDefaultValue="null"
-    stringModifiedNullable="true"
-    superClassName="Header"
-    superClassResourcePath="com.tmax.proobject.model.context">
+    stringModifiedNullable="true">
   <proobject:dtoField
       array=""
       columnName=""

@@ -11,7 +11,7 @@ import java.util.Map;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.dto.DtoGenerator",
-	date= "23. 12. 18. 오후 7:12"
+	date= "23. 12. 19. 오후 1:34"
 )
 
 @com.tmax.proobject.core2.annotation.DataObject
@@ -52,12 +52,27 @@ public class CustomHeader extends com.tmax.proobject.model.context.Header {
     		this.SysHeader = SysHeader;
     	}
     }
+    private com.tmax.custom.header.ErrorHeader ErrorHeader = null;
+    private transient boolean ErrorHeader_modified = false;
+    
+    public com.tmax.custom.header.ErrorHeader getErrorHeader() {
+    	return ErrorHeader;
+    }	
+    
+    public void setErrorHeader(com.tmax.custom.header.ErrorHeader ErrorHeader) {
+    	if (ErrorHeader == null) {
+    		this.ErrorHeader = null;
+    	} else {
+    		this.ErrorHeader = ErrorHeader;
+    	}
+    }
     
     public String toString() {
     	StringBuilder buffer = new StringBuilder();
     	
     	buffer.append("ProHeader : ").append(ProHeader).append("\n");   
     	buffer.append("SysHeader : ").append(SysHeader).append("\n");   
+    	buffer.append("ErrorHeader : ").append(ErrorHeader).append("\n");   
     	return buffer.toString();
     }
     
@@ -86,6 +101,12 @@ public class CustomHeader extends com.tmax.proobject.model.context.Header {
     	}else {
     		this.setSysHeader((com.tmax.custom.header.SysHeader)_value1.clone());
     	}
+    	com.tmax.custom.header.ErrorHeader _value2 = __customHeader.getErrorHeader();
+    	if (_value2 == null) {
+    		this.setErrorHeader(null);
+    	}else {
+    		this.setErrorHeader((com.tmax.custom.header.ErrorHeader)_value2.clone());
+    	}
     }
     
     
@@ -96,6 +117,8 @@ public class CustomHeader extends com.tmax.proobject.model.context.Header {
     		return getProHeader();
     	case "SysHeader":
     		return getSysHeader();
+    	case "ErrorHeader":
+    		return getErrorHeader();
     	default:
     		return super.get(fieldName);
     	}
@@ -110,6 +133,9 @@ public class CustomHeader extends com.tmax.proobject.model.context.Header {
     	case "SysHeader":
     		setSysHeader((com.tmax.custom.header.SysHeader) fieldValue);
     		break;
+    	case "ErrorHeader":
+    		setErrorHeader((com.tmax.custom.header.ErrorHeader) fieldValue);
+    		break;
     	default:
     		super.set(fieldName, fieldValue);
     		
@@ -119,11 +145,13 @@ public class CustomHeader extends com.tmax.proobject.model.context.Header {
     private static final Map<String, FieldProperty> fieldPropertyMap;
     
     static {
-    	fieldPropertyMap = new java.util.LinkedHashMap<String, FieldProperty>(2);
+    	fieldPropertyMap = new java.util.LinkedHashMap<String, FieldProperty>(3);
     	fieldPropertyMap.put("ProHeader", FieldProperty.builder().setPhysicalName("ProHeader").setLogicalName("ProHeader")
     	              .setType(FieldProperty.TYPE_ABSTRACT_INCLUDE).setDecimal(-1).setReference("com.tmax.custom.header.ProHeader").build());
     	fieldPropertyMap.put("SysHeader", FieldProperty.builder().setPhysicalName("SysHeader").setLogicalName("SysHeader")
     	              .setType(FieldProperty.TYPE_ABSTRACT_INCLUDE).setDecimal(-1).setReference("com.tmax.custom.header.SysHeader").build());
+    	fieldPropertyMap.put("ErrorHeader", FieldProperty.builder().setPhysicalName("ErrorHeader").setLogicalName("ErrorHeader")
+    	              .setType(FieldProperty.TYPE_ABSTRACT_INCLUDE).setDecimal(-1).setReference("com.tmax.custom.header.ErrorHeader").build());
     }
     
     @Override
@@ -135,6 +163,7 @@ public class CustomHeader extends com.tmax.proobject.model.context.Header {
     public void clearModifiedStatus() {
     	ProHeader_modified = false;
     	SysHeader_modified = false;
+    	ErrorHeader_modified = false;
     }
     
     @Override
@@ -145,6 +174,9 @@ public class CustomHeader extends com.tmax.proobject.model.context.Header {
     		break;
     	case "SysHeader":
     		SysHeader_modified = false;
+    		break;
+    	case "ErrorHeader":
+    		ErrorHeader_modified = false;
     		break;
       	default:
          	throw new FieldNotFoundException(fieldName);
@@ -158,12 +190,14 @@ public class CustomHeader extends com.tmax.proobject.model.context.Header {
         	modifiedFields.add("ProHeader");
         if (this.SysHeader_modified = true)
         	modifiedFields.add("SysHeader");
+        if (this.ErrorHeader_modified = true)
+        	modifiedFields.add("ErrorHeader");
         return modifiedFields;
     }
     
     @Override
     public boolean isModified() {
-    	if (ProHeader_modified || SysHeader_modified) {
+    	if (ProHeader_modified || SysHeader_modified || ErrorHeader_modified) {
     		return true;
     	}
     	return false;
@@ -176,6 +210,8 @@ public class CustomHeader extends com.tmax.proobject.model.context.Header {
     		return ProHeader_modified;
     	case "SysHeader":
     		return SysHeader_modified;
+    	case "ErrorHeader":
+    		return ErrorHeader_modified;
        	default:
       		throw new FieldNotFoundException(fieldName);
         }

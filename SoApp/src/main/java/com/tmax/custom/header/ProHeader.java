@@ -1,5 +1,6 @@
 package com.tmax.custom.header;
 
+import com.tmax.proobject.model.dataobject.DataObject;
 import com.tmax.proobject.model.dataobject.FieldProperty;
 import com.tmax.proobject.model.exception.FieldNotFoundException;
 
@@ -8,14 +9,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.io.Serializable;
+import java.lang.Cloneable;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.dto.DtoGenerator",
-	date= "23. 12. 18. 오후 7:09"
+	date= "23. 12. 19. 오후 2:00"
 )
 
 @com.tmax.proobject.core2.annotation.DataObject
-public class ProHeader extends com.tmax.proobject.model.context.Header {
+public class ProHeader extends DataObject implements Serializable, Cloneable {
     
     private static final long serialVersionUID = 1L;
     
@@ -98,13 +101,13 @@ public class ProHeader extends com.tmax.proobject.model.context.Header {
     		return;
     		
     	ProHeader __proHeader = (ProHeader) _proHeader;
-    	super.clone(__proHeader);
     	this.setName(__proHeader.getName());
     	this.setEnumber(__proHeader.getEnumber());
     	this.setPosition(__proHeader.getPosition());
     }
     
     
+    @SuppressWarnings("unchecked")
     @Override
     public Object get(String fieldName) throws FieldNotFoundException {
     	switch (fieldName) {
@@ -115,7 +118,7 @@ public class ProHeader extends com.tmax.proobject.model.context.Header {
     	case "position":
     		return getPosition();
     	default:
-    		return super.get(fieldName);
+    		throw new FieldNotFoundException(fieldName);
     	}
     }
     
@@ -132,7 +135,7 @@ public class ProHeader extends com.tmax.proobject.model.context.Header {
     		setPosition((String) fieldValue);
     		break;
     	default:
-    		super.set(fieldName, fieldValue);
+    		throw new FieldNotFoundException(fieldName);
     		
     	}
     }

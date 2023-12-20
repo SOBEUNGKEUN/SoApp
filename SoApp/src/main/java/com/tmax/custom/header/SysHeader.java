@@ -1,5 +1,6 @@
 package com.tmax.custom.header;
 
+import com.tmax.proobject.model.dataobject.DataObject;
 import com.tmax.proobject.model.dataobject.FieldProperty;
 import com.tmax.proobject.model.exception.FieldNotFoundException;
 
@@ -8,14 +9,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.io.Serializable;
+import java.lang.Cloneable;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.dto.DtoGenerator",
-	date= "23. 12. 18. 오후 7:10"
+	date= "23. 12. 19. 오후 2:00"
 )
 
 @com.tmax.proobject.core2.annotation.DataObject
-public class SysHeader extends com.tmax.proobject.model.context.Header {
+public class SysHeader extends DataObject implements Serializable, Cloneable {
     
     private static final long serialVersionUID = 1L;
     
@@ -88,13 +91,13 @@ public class SysHeader extends com.tmax.proobject.model.context.Header {
     		return;
     		
     	SysHeader __sysHeader = (SysHeader) _sysHeader;
-    	super.clone(__sysHeader);
     	this.setIp(__sysHeader.getIp());
     	this.setUserId(__sysHeader.getUserId());
     	this.setUserPwd(__sysHeader.getUserPwd());
     }
     
     
+    @SuppressWarnings("unchecked")
     @Override
     public Object get(String fieldName) throws FieldNotFoundException {
     	switch (fieldName) {
@@ -105,7 +108,7 @@ public class SysHeader extends com.tmax.proobject.model.context.Header {
     	case "userPwd":
     		return getUserPwd();
     	default:
-    		return super.get(fieldName);
+    		throw new FieldNotFoundException(fieldName);
     	}
     }
     
@@ -122,7 +125,7 @@ public class SysHeader extends com.tmax.proobject.model.context.Header {
     		setUserPwd((String) fieldValue);
     		break;
     	default:
-    		super.set(fieldName, fieldValue);
+    		throw new FieldNotFoundException(fieldName);
     		
     	}
     }

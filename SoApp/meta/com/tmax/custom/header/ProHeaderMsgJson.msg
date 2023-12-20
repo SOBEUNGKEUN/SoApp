@@ -11,9 +11,7 @@
     dtoId="00009e645eda0008162b7a00000109bf"
     dtoName="ProHeader"
     dtoPath="com/tmax/custom/header"
-    messageType="JSON"
-    superClassName="HeaderMsgJson"
-    superClassResourcePath="com/tmax/proobject/model/context">
+    messageType="JSON">
   <proobject:messageField
       align="None"
       array=""

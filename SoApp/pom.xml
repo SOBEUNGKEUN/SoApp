@@ -19,7 +19,7 @@
 		<spring.kafka.version>1.3.11.RELEASE</spring.kafka.version>
 		
 		<!-- Please enter the proobject version -->
-		<proobject.version>21.0.0.1.55</proobject.version>
+		<proobject.version>21.0.0.1.56-SNAPSHOT</proobject.version>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 	</properties>
 

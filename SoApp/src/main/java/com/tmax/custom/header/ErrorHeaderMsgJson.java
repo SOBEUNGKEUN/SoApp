@@ -16,15 +16,15 @@ import proobject.com.google.gson.stream.JsonToken;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.message.MessageGenerator",
-	date= "23. 12. 19. 오후 1:34"
+	date= "23. 12. 19. 오후 2:00"
 )
 
 @Message
-public class CustomHeaderMsgJson extends com.tmax.proobject.model.context.HeaderMsgJson {
+public class ErrorHeaderMsgJson extends AbstractMessage {
     public byte[] marshal(Object obj) throws MarshalException {
-    	CustomHeader _CustomHeader = (CustomHeader)obj;
+    	ErrorHeader _ErrorHeader = (ErrorHeader)obj;
     	
-    	if (_CustomHeader == null)
+    	if (_ErrorHeader == null)
     		return null;
     	
     	BufferedWriter bw = null;
@@ -37,7 +37,7 @@ public class CustomHeaderMsgJson extends com.tmax.proobject.model.context.Header
     		jw = new JsonWriter( bw );
     		jw.beginObject();
     
-    		marshal( _CustomHeader, jw);
+    		marshal( _ErrorHeader, jw);
     		
     		jw.endObject();
     		jw.close();
@@ -64,33 +64,35 @@ public class CustomHeaderMsgJson extends com.tmax.proobject.model.context.Header
     }
     
     
-    public void marshal(com.tmax.custom.header.CustomHeader _CustomHeader, JsonWriter writer )throws IOException {
-    	super.marshal(_CustomHeader, writer);
+    public void marshal(com.tmax.custom.header.ErrorHeader _ErrorHeader, JsonWriter writer )throws IOException {
     
-    	com.tmax.custom.header.ProHeaderMsgJson __ProHeader = new com.tmax.custom.header.ProHeaderMsgJson();	
-    	writer.name("ProHeader");
-    	if (_CustomHeader.getProHeader() != null) {
-    	writer.beginObject();
-    	__ProHeader.marshal((com.tmax.custom.header.ProHeader)_CustomHeader.getProHeader(), writer);
-    	writer.endObject();
+    	writer.name("responseCode"); 
+    	if (_ErrorHeader.getResponseCode() != null) {
+    		writer.value(_ErrorHeader.getResponseCode());
     	} else {
     		writer.nullValue();
     	}
-    	com.tmax.custom.header.SysHeaderMsgJson __SysHeader = new com.tmax.custom.header.SysHeaderMsgJson();	
-    	writer.name("SysHeader");
-    	if (_CustomHeader.getSysHeader() != null) {
-    	writer.beginObject();
-    	__SysHeader.marshal((com.tmax.custom.header.SysHeader)_CustomHeader.getSysHeader(), writer);
-    	writer.endObject();
+    	writer.name("responseType"); 
+    	if (_ErrorHeader.getResponseType() != null) {
+    		writer.value(_ErrorHeader.getResponseType());
     	} else {
     		writer.nullValue();
     	}
-    	com.tmax.custom.header.ErrorHeaderMsgJson __ErrorHeader = new com.tmax.custom.header.ErrorHeaderMsgJson();	
-    	writer.name("ErrorHeader");
-    	if (_CustomHeader.getErrorHeader() != null) {
-    	writer.beginObject();
-    	__ErrorHeader.marshal((com.tmax.custom.header.ErrorHeader)_CustomHeader.getErrorHeader(), writer);
-    	writer.endObject();
+    	writer.name("responseTitle"); 
+    	if (_ErrorHeader.getResponseTitle() != null) {
+    		writer.value(_ErrorHeader.getResponseTitle());
+    	} else {
+    		writer.nullValue();
+    	}
+    	writer.name("responseBasic"); 
+    	if (_ErrorHeader.getResponseBasic() != null) {
+    		writer.value(_ErrorHeader.getResponseBasic());
+    	} else {
+    		writer.nullValue();
+    	}
+    	writer.name("responseDtal"); 
+    	if (_ErrorHeader.getResponseDtal() != null) {
+    		writer.value(_ErrorHeader.getResponseDtal());
     	} else {
     		writer.nullValue();
     	}
@@ -112,20 +114,20 @@ public class CustomHeaderMsgJson extends com.tmax.proobject.model.context.Header
     }
     
     
-    public CustomHeader unmarshal(byte[] bytes) throws UnmarshalException {
-    	CustomHeader _CustomHeader = new CustomHeader();
+    public ErrorHeader unmarshal(byte[] bytes) throws UnmarshalException {
+    	ErrorHeader _ErrorHeader = new ErrorHeader();
     	BufferedReader reader = null;
     	JsonReader jr = null;
     
     	if ( bytes.length <= 0)
-    		return new CustomHeader();
+    		return new ErrorHeader();
     
     	try{
     		reader = new BufferedReader( new InputStreamReader( new ByteArrayInputStream(bytes), this.encoding));		       
     		jr = new JsonReader( reader );                
     		jr.beginObject();
     
-    		_CustomHeader = (CustomHeader)unmarshal( jr,  _CustomHeader);
+    		_ErrorHeader = (ErrorHeader)unmarshal( jr,  _ErrorHeader);
     
     		jr.endObject();
     		jr.close();
@@ -149,24 +151,24 @@ public class CustomHeaderMsgJson extends com.tmax.proobject.model.context.Header
     				}
     		}
     	}
-    	return _CustomHeader;
+    	return _ErrorHeader;
     }
     	
-    public Object unmarshal(byte[] bytes, CustomHeader dto) throws UnmarshalException {
+    public Object unmarshal(byte[] bytes, ErrorHeader dto) throws UnmarshalException {
     	
-    	CustomHeader _CustomHeader = (CustomHeader) dto;
+    	ErrorHeader _ErrorHeader = (ErrorHeader) dto;
     	BufferedReader reader = null;
     	JsonReader jr = null;
     	
     	if ( bytes.length <= 0)
-    		return new CustomHeader();
+    		return new ErrorHeader();
     	
     	try{
     		reader = new BufferedReader( new InputStreamReader( new ByteArrayInputStream(bytes), this.encoding));		       
     		jr = new JsonReader( reader );                
     		jr.beginObject();
     
-    		_CustomHeader = (CustomHeader)unmarshal( jr,  _CustomHeader);
+    		_ErrorHeader = (ErrorHeader)unmarshal( jr,  _ErrorHeader);
     
     		jr.endObject();
     		jr.close();
@@ -192,10 +194,10 @@ public class CustomHeaderMsgJson extends com.tmax.proobject.model.context.Header
     		}
     	}
     	                       
-        return _CustomHeader;
+        return _ErrorHeader;
     }
     
-    public CustomHeader unmarshal(JsonReader reader, CustomHeader dto) throws IOException {	
+    public ErrorHeader unmarshal(JsonReader reader, ErrorHeader dto) throws IOException {	
     	
     	while( reader.hasNext() ){
     		String name = reader.nextName();			
@@ -205,57 +207,63 @@ public class CustomHeaderMsgJson extends com.tmax.proobject.model.context.Header
     	return dto;
     }
     	 
-    protected void setField(CustomHeader dto, JsonReader reader, String name) throws IOException {
+    protected void setField(ErrorHeader dto, JsonReader reader, String name) throws IOException {
     	
     	switch(name) {
-    		case "ProHeader" :
+    		case "responseCode" :
     		{	
-    			if (reader.peek() == JsonToken.NULL) {
-    				reader.nextNull();
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setResponseCode( reader.nextString());
     			} else {
-    				com.tmax.custom.header.ProHeaderMsgJson __ProHeader = new com.tmax.custom.header.ProHeaderMsgJson();
-    				com.tmax.custom.header.ProHeader ___ProHeader = new com.tmax.custom.header.ProHeader();
-    				reader.beginObject();
-    				dto.setProHeader((com.tmax.custom.header.ProHeader)__ProHeader.unmarshal( reader, ___ProHeader ));
-    				reader.endObject();
+    				reader.nextNull();
     			}
     			break;
-    		}
-    		case "SysHeader" :
+    		}	
+    		case "responseType" :
     		{	
-    			if (reader.peek() == JsonToken.NULL) {
-    				reader.nextNull();
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setResponseType( reader.nextString());
     			} else {
-    				com.tmax.custom.header.SysHeaderMsgJson __SysHeader = new com.tmax.custom.header.SysHeaderMsgJson();
-    				com.tmax.custom.header.SysHeader ___SysHeader = new com.tmax.custom.header.SysHeader();
-    				reader.beginObject();
-    				dto.setSysHeader((com.tmax.custom.header.SysHeader)__SysHeader.unmarshal( reader, ___SysHeader ));
-    				reader.endObject();
+    				reader.nextNull();
     			}
     			break;
-    		}
-    		case "ErrorHeader" :
+    		}	
+    		case "responseTitle" :
     		{	
-    			if (reader.peek() == JsonToken.NULL) {
-    				reader.nextNull();
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setResponseTitle( reader.nextString());
     			} else {
-    				com.tmax.custom.header.ErrorHeaderMsgJson __ErrorHeader = new com.tmax.custom.header.ErrorHeaderMsgJson();
-    				com.tmax.custom.header.ErrorHeader ___ErrorHeader = new com.tmax.custom.header.ErrorHeader();
-    				reader.beginObject();
-    				dto.setErrorHeader((com.tmax.custom.header.ErrorHeader)__ErrorHeader.unmarshal( reader, ___ErrorHeader ));
-    				reader.endObject();
+    				reader.nextNull();
     			}
     			break;
-    		}
+    		}	
+    		case "responseBasic" :
+    		{	
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setResponseBasic( reader.nextString());
+    			} else {
+    				reader.nextNull();
+    			}
+    			break;
+    		}	
+    		case "responseDtal" :
+    		{	
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setResponseDtal( reader.nextString());
+    			} else {
+    				reader.nextNull();
+    			}
+    			break;
+    		}	
     		default :
-    		super.setField(dto, reader, name);
+    		reader.skipValue();
     			break;
     	}
     }
     
     @Override
     public Object getDtoInstance() {        
-       return new CustomHeader();
+       return new ErrorHeader();
     }
         
 }
