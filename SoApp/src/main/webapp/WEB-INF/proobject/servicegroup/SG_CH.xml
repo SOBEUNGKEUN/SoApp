@@ -21,6 +21,17 @@
     </sg:service-meta>
     <sg:exclude-source-generation>false</sg:exclude-source-generation>
   </sg:service-resource>
+  <sg:service-resource resourceName="ServletCallPC" resourcePackage="com.tmax.custom.sample.pc">
+    <sg:service-meta>
+      <sg:service-name>ServletCallPC_testCall</sg:service-name>
+      <sg:service-method-name>testCall</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_CH/ServletCallPC_testCall"/>
+      <sg:outbound>false</sg:outbound>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
   <sg:custom-header>com.tmax.custom.header.CustomHeader</sg:custom-header>
   <sg:custom-http-parser>com.tmax.custom.parser.CustomParser</sg:custom-http-parser>
   <sg:call-optimization-disable>false</sg:call-optimization-disable>

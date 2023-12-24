@@ -1,3 +1,4 @@
+
 package com.tmax.custom.batch.job;
 
 import org.springframework.batch.core.Job;
@@ -8,25 +9,33 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.tmax.custom.batch.handler.SampleBatchListener;
-import com.tmax.custom.batch.step.SampleBatchLogStep;
+import com.tmax.custom.batch.step.CompressedBatchStep;
+import com.tmax.custom.batch.step.SampleBatchInsertStep;
 
 @Configuration
-public class SampleBatchLogJob {
+public class CompressedBatchJob {
 	
 	@Autowired
-	public JobBuilderFactory jobBuilderFactory;
+	private JobBuilderFactory jobBuilderFactory;
 	
 	@Autowired
-	public SampleBatchLogStep sampleBatchLogStep;
+	private CompressedBatchStep compressedBatchStep;
+	
+	@Autowired
+	private SampleBatchListener sampleBatchListener;
+	
+	@Autowired
+	private SampleBatchInsertStep sampleBatchInsertStep;
+	
 	@Bean
-	public Job SampleBatchLogJob(SampleBatchListener sampleBatchListener) {
-		
-		return jobBuilderFactory.get("SampleBatchLogJob")
+	public Job compressJob() throws Exception {
+		return jobBuilderFactory.get("compressJob")
 				.incrementer(new RunIdIncrementer())
 				.listener(sampleBatchListener)
-				.start(sampleBatchLogStep.SampleLogStep1())
-				.next(sampleBatchLogStep.SampleLogStep2())
-				.next(sampleBatchLogStep.SampleLogStep3())
+				.flow(sampleBatchInsertStep.SampleStep())
+				.next(compressedBatchStep.compresseStep())
+				.end()
 				.build();
+		
 	}
 }

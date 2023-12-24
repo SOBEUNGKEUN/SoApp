@@ -11,7 +11,7 @@ import java.util.Map;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.dto.DtoGenerator",
-	date= "23. 12. 19. 오후 1:34"
+	date= "23. 12. 21. 오전 11:18"
 )
 
 @com.tmax.proobject.core2.annotation.DataObject

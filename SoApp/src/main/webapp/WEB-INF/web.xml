@@ -6,7 +6,6 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>json</servlet-name>
-		<url-pattern>/SoApp/SG_EG/JSON/*</url-pattern>
-		<url-pattern>/SoApp/SG_CH/JSON/*</url-pattern>
+		<url-pattern>/JSON/*</url-pattern>
 	</servlet-mapping>
 </web-app>

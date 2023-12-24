@@ -21,11 +21,11 @@ public class SampleBatchProcessor{
 			output.setEmpno(input.getEmpno());
 			output.setEname(input.getEname());
 			
-			Thread.sleep(500);
+			
 			
 			logger.info("Converting (" + input + ") into (" + output + ")");
 			
-			Thread.sleep(2000);
+			
 			
 			return output;
 		};

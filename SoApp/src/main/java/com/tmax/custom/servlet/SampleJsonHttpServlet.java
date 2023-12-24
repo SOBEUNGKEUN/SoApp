@@ -16,9 +16,13 @@ import org.springframework.util.StreamUtils;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tmax.custom.header.ProHeader;
+import com.tmax.custom.header.SysHeader;
+import com.tmax.custom.util.RecieverCaller;
 import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
 
+import proframe.util.StringUtils;
 import proobject.com.google.gson.JsonElement;
 import proobject.com.google.gson.JsonObject;
 import proobject.com.google.gson.JsonParser;
@@ -58,9 +62,9 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		
 		// 요청전문 
-		String reqJsonforData ="";
+		String reqJsonformData ="";
 		// 응답전문
-		String resJsonforData ="";
+		String resJsonformData ="";
 		// 결과
 		String result ="";
 		
@@ -87,18 +91,64 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		@SuppressWarnings("deprecation")
 		// string 데이터 받아서 json으로 파싱후 object에 담기
 		Object obj = parser.parse(tmpJsonformData);
-		logger.info("######## obj : " + obj);
+//		logger.info("######## obj : " + obj);
 		JsonObject jsonObj = (JsonObject)obj;
-		logger.info("######## jsonObj : " + jsonObj);
+//		logger.info("######## jsonObj : " + jsonObj);
 		
-		// 헤더 가져오기
-		JsonElement proheader = jsonObj.get("ProHeader");
-		logger.info("######## proheader : " + proheader);
-		JsonElement sysheader = jsonObj.get("SysHeader");
-		logger.info("######## sysheader : " + sysheader);
+		// 요청 헤더 가져오기
+		JsonElement tmpproheader = jsonObj.get("ProHeader");
+
+		JsonElement tmpsysheader = jsonObj.get("SysHeader");
+
+		ProHeader reqProHeader = objectMapper.readValue(tmpproheader.toString(), ProHeader.class);
+		SysHeader reqSysHeader = objectMapper.readValue(tmpproheader.toString(), SysHeader.class);
+			
+		// Vadlidation 함수 생성예정
+		/*
+		 
+		 */
 		
+		// 헤더에 값 세팅
+		if(StringUtils.isNull(reqProHeader.getGuid()))
+			reqProHeader.setGuid("<94578fsd>");
+		if(StringUtils.isNull(reqSysHeader.getIp()))
+			reqSysHeader.setIp(httpRequest.getRemoteAddr());	
+		
+		// 전문 만들기
+		JsonObject proHeader = (JsonObject) jsonObj.get("ProHeader");
+		proHeader.addProperty("guid", reqProHeader.getGuid());
+		
+		JsonObject sysHeader = (JsonObject) jsonObj.get("SysHeader");
+		sysHeader.addProperty("ip", reqSysHeader.getIp());
+		
+		// 만들어진 헤더 세팅
+		jsonObj.add("ProHeader", proHeader);
+		jsonObj.add("SysHeader", sysHeader);
+		
+		reqJsonformData = jsonObj.toString();
+		
+		logger.info("######## reqJsonformData : " + reqJsonformData);
+		
+		// PO21 호출
+		result = jsonCallReciever(httpRequest, reqProHeader, reqSysHeader, reqJsonformData,
+				resJsonformData, proHeader.toString(), sysHeader.toString(), queryString, remoteAdress, result);
 		
 	}
+	
+
+	// JSON Reciever
+	private String jsonCallReciever(HttpServletRequest httpRequest, ProHeader reqProHeader, SysHeader reqSysHeader, 
+			String reqJsonformData, String resJsonformData, String tmpproheader, String tmpsysheader, String queryString, String remoteAdress, String result) throws IOException {
+		logger.info("######## jsonCallReciever Start ########## " );
+		
+		RecieverCaller caller = new RecieverCaller();
+		
+		result = caller.jsCallReciever(reqJsonformData, queryString, remoteAdress, reqProHeader, reqSysHeader);
+		
+		return result;
+		// sgnm제외
+	}
+	
 	
 	// HttpServletRequest 예외처리
 	private void responseException(HttpServletRequest httpRequest, Exception e) {

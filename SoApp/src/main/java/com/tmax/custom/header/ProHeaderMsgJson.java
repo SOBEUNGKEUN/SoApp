@@ -16,7 +16,7 @@ import proobject.com.google.gson.stream.JsonToken;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.message.MessageGenerator",
-	date= "23. 12. 19. 오후 2:00"
+	date= "23. 12. 21. 오전 11:18"
 )
 
 @Message
@@ -66,6 +66,36 @@ public class ProHeaderMsgJson extends AbstractMessage {
     
     public void marshal(com.tmax.custom.header.ProHeader _ProHeader, JsonWriter writer )throws IOException {
     
+    	writer.name("appName"); 
+    	if (_ProHeader.getAppName() != null) {
+    		writer.value(_ProHeader.getAppName());
+    	} else {
+    		writer.nullValue();
+    	}
+    	writer.name("sgName"); 
+    	if (_ProHeader.getSgName() != null) {
+    		writer.value(_ProHeader.getSgName());
+    	} else {
+    		writer.nullValue();
+    	}
+    	writer.name("svcName"); 
+    	if (_ProHeader.getSvcName() != null) {
+    		writer.value(_ProHeader.getSvcName());
+    	} else {
+    		writer.nullValue();
+    	}
+    	writer.name("fnName"); 
+    	if (_ProHeader.getFnName() != null) {
+    		writer.value(_ProHeader.getFnName());
+    	} else {
+    		writer.nullValue();
+    	}
+    	writer.name("guid"); 
+    	if (_ProHeader.getGuid() != null) {
+    		writer.value(_ProHeader.getGuid());
+    	} else {
+    		writer.nullValue();
+    	}
     	writer.name("name"); 
     	if (_ProHeader.getName() != null) {
     		writer.value(_ProHeader.getName());
@@ -194,6 +224,51 @@ public class ProHeaderMsgJson extends AbstractMessage {
     protected void setField(ProHeader dto, JsonReader reader, String name) throws IOException {
     	
     	switch(name) {
+    		case "appName" :
+    		{	
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setAppName( reader.nextString());
+    			} else {
+    				reader.nextNull();
+    			}
+    			break;
+    		}	
+    		case "sgName" :
+    		{	
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setSgName( reader.nextString());
+    			} else {
+    				reader.nextNull();
+    			}
+    			break;
+    		}	
+    		case "svcName" :
+    		{	
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setSvcName( reader.nextString());
+    			} else {
+    				reader.nextNull();
+    			}
+    			break;
+    		}	
+    		case "fnName" :
+    		{	
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setFnName( reader.nextString());
+    			} else {
+    				reader.nextNull();
+    			}
+    			break;
+    		}	
+    		case "guid" :
+    		{	
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setGuid( reader.nextString());
+    			} else {
+    				reader.nextNull();
+    			}
+    			break;
+    		}	
     		case "name" :
     		{	
     			if (reader.peek() != JsonToken.NULL) {
