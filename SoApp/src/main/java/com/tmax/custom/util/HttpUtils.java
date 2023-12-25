@@ -15,38 +15,38 @@ import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
 
 public class HttpUtils {
-	
-	public static String requestPostData(String address, String data, String encChar) throws IOException{
-		
+
+	public static String requestPostData(String address, String data, String encChar) throws IOException {
+
 		ProObjectLogger logger = SystemLogger.getLogger();
-		
+
 		logger.info("##### requestPostData Start #### : ");
-		
+
 		StringBuilder sb;
-		
+
 		HttpURLConnection conn = null;
 		DataOutputStream os = null;
 		BufferedReader br = null;
-		
+
 		try {
 			logger.info("##### 커넥션 시도 #### : ");
 			logger.info("##### address : " + address);
 			logger.info("##### encChar : " + encChar);
 			// connection
 			conn = getNewHttpURLConnection(address, encChar);
-			logger.info("##### conn : "+ conn);
+			logger.info("##### conn : " + conn);
 			// outputStream
 			os = writeOutputStream(data, encChar, conn);
-			logger.info("##### os : "+ os);
+			logger.info("##### os : " + os);
 			// inputStream
 			br = readInputStream(encChar, conn);
-			logger.info("##### br : "+ br);
-			
+			logger.info("##### br : " + br);
+
 			// inputStream 읽기
 			String sbuild;
 			sb = new StringBuilder();
-			while((sbuild= br.readLine()) !=null)
-				sb.append(sbuild+"\n");
+			while ((sbuild = br.readLine()) != null)
+				sb.append(sbuild + "\n");
 		} catch (MalformedURLException e) {
 			throw e;
 		} catch (IOException e) {
@@ -56,24 +56,24 @@ public class HttpUtils {
 				logger.info("##### finally 진입 #### : ");
 				if (br != null)
 					br.close();
-			}catch (IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			try {
 				if (os != null)
 					os.close();
-			}catch (IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
 			if (conn != null)
 				conn.disconnect();
 		}
-		logger.info("##### StringBuilder #### : "+ sb.toString());
+		logger.info("##### StringBuilder #### : " + sb.toString());
 		return sb.toString();
 	}
 
-	//URLConnection
+	// URLConnection
 	private static HttpURLConnection getNewHttpURLConnection(String address, String encChar)
 			throws MalformedURLException, IOException, ProtocolException {
 		ProObjectLogger logger = SystemLogger.getLogger();
@@ -81,7 +81,7 @@ public class HttpUtils {
 		logger.info("############# HttpURLConnection 진입 ###########");
 		HttpURLConnection conn;
 		URL url = new URL(address);
-		logger.info("##### url : "+ url);
+		logger.info("##### url : " + url);
 		conn = (HttpURLConnection) url.openConnection();
 		conn.setDoOutput(true);
 		conn.setDoInput(true);
@@ -90,16 +90,17 @@ public class HttpUtils {
 		conn.setReadTimeout(300000);
 
 		conn.setRequestProperty("Content-Type", "application/json");
-		conn.setRequestProperty("Msg-Type", "json");
+		conn.setRequestProperty("Msg-Type", "TEST");
 		conn.setRequestProperty("charset", encChar);
 
-		logger.info("##### conn : "+ conn);
-		
+		logger.info("##### conn : " + conn);
+
 		return conn;
 	}
 
-	//OutputStream
-	private static DataOutputStream writeOutputStream(String data, String encChar, HttpURLConnection conn) throws IOException, UnsupportedEncodingException {
+	// OutputStream
+	private static DataOutputStream writeOutputStream(String data, String encChar, HttpURLConnection conn)
+			throws IOException, UnsupportedEncodingException {
 		ProObjectLogger logger = SystemLogger.getLogger();
 		DataOutputStream os;
 		// connection에서 outputstream 값 가져오기
@@ -107,37 +108,42 @@ public class HttpUtils {
 		// 데이터 내보내기
 		os.write(data.getBytes(encChar));
 		os.flush();
-		logger.info("#### os : "+os);
+		logger.info("#### os : " + os);
 		return os;
 	}
-	
+
 	// InputStream
-	private static BufferedReader readInputStream(String enchar, HttpURLConnection conn) throws UnsupportedEncodingException, IOException{
-		
+	private static BufferedReader readInputStream(String enchar, HttpURLConnection conn)
+			throws UnsupportedEncodingException, IOException {
+
 		ProObjectLogger logger = SystemLogger.getLogger();
-		
+
 		String masterIp = conn.getURL().getHost();
-		
+
 		logger.info("########### conn.getUrl.getHost() : " + masterIp);
 		logger.info("########### conn.getUrl.getResponseCode() : " + conn.getResponseCode());
+
 		
+		logger.info("########### ProObject.getMasterIp() : " + ProObject.getMasterIp());
+		logger.info("########### ProObject.getMasterPort() : " + ProObject.getMasterPort());
 		// po 내부 호출
-		if(ProObject.getMasterIp().equals(masterIp)) {
-			// 응답 코드 400 이하 일때 -> 정상 처리
-			if(conn.getResponseCode() < HttpURLConnection.HTTP_BAD_REQUEST) {
-				BufferedReader br;
-				br = new BufferedReader(new InputStreamReader(conn.getInputStream(), enchar));
-				return br;
-			} else { // 400이상일 때 에러 스트림 처리
-				BufferedReader br;
-				br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), enchar));
-				return br;
-			}
-		}else {
-			logger.info("########### Master IP기 PO로 들어오지 않는 경우 #########");
-			BufferedReader br;
-			br = new BufferedReader(new InputStreamReader(conn.getInputStream(), enchar));
-			return br;
-		}
+
+		logger.info("########### po 내부 호출 ###########  ");
+		BufferedReader br;
+		br = new BufferedReader(new InputStreamReader(conn.getInputStream(), enchar));
+		return br;
+		
+		
+		// 응답 코드 400 이하 일때 -> 정상 처리
+		// ProObject.getMasterIp() == node-app
+//		if (conn.getResponseCode() < HttpURLConnection.HTTP_BAD_REQUEST) {
+//			BufferedReader br;
+//			br = new BufferedReader(new InputStreamReader(conn.getInputStream(), enchar));
+//			return br;
+//		} else { // 400이상일 때 에러 스트림 처리
+//			BufferedReader br;
+//			br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), enchar));
+//			return br;
+//		}
 	}
 }

@@ -38,6 +38,7 @@ public class SampleJsonHttpServlet extends HttpServlet{
 	public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		logger.info("######## SampleJsonHttpServlet service ServletRequest 진입 ##############");
+		logger.info("######## SampleJsonHttpServlet servletResponse : "+servletResponse);
 		this.service((HttpServletRequest)servletRequest, (HttpServletResponse)servletResponse);
 	}
 	
@@ -46,7 +47,7 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		// TODO Auto-generated method stub
 		
 		logger.info("######## SampleJsonHttpServlet service HttpServletRequest 진입 ##############");
-		
+		logger.info("######## service httpServletResponse : "+httpServletResponse);
 		try {
 			this._service(httpServletRequest, httpServletResponse);
 		} catch(Exception e) {
@@ -67,6 +68,8 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		String resJsonformData ="";
 		// 결과
 		String result ="";
+		
+		String responseResult = "";
 		
 		ServletInputStream inputStream = httpRequest.getInputStream(); 
 		logger.info("######## inputStream : " + inputStream);
@@ -130,8 +133,15 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		logger.info("######## reqJsonformData : " + reqJsonformData);
 		
 		// PO21 호출
-		result = jsonCallReciever(httpRequest, reqProHeader, reqSysHeader, reqJsonformData,
+		responseResult = jsonCallReciever(httpRequest, reqProHeader, reqSysHeader, reqJsonformData,
 				resJsonformData, proHeader.toString(), sysHeader.toString(), queryString, remoteAdress, result);
+		
+		logger.info("######## _service_result : " + responseResult);
+		
+		logger.info("######## _service_httpResponse.getHeader : " + httpResponse.getHeader(responseResult));
+		logger.info("######## _service_httpResponse.getOutputStream : " + httpResponse.getOutputStream());
+		logger.info("######## _service_httpResponse.getWriter() : " + httpResponse.getWriter());
+		logger.info("######## After_service_httpResponse : " + httpResponse);
 		
 	}
 	
@@ -146,7 +156,6 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		result = caller.jsCallReciever(reqJsonformData, queryString, remoteAdress, reqProHeader, reqSysHeader);
 		
 		return result;
-		// sgnm제외
 	}
 	
 	

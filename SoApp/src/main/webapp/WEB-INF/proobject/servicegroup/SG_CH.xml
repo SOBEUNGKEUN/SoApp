@@ -29,6 +29,7 @@
       <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
       <sg:urlMapping restType="POST" url="/SoApp/SG_CH/ServletCallPC_testCall"/>
       <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
     </sg:service-meta>
     <sg:exclude-source-generation>false</sg:exclude-source-generation>
   </sg:service-resource>

@@ -37,32 +37,32 @@ public class CustomParser implements HttpBodyParser {
 	private ProObjectLogger logger = SystemLogger.getLogger();
 
 	@Override
-	public byte[] marshalErrorResponseBody(Throwable exception, Object input, ServiceName serviceName, RequestContext requestContext,
-			ProMapperMessageType messageType) throws Exception {
+	public byte[] marshalErrorResponseBody(Throwable exception, Object input, ServiceName serviceName,
+			RequestContext requestContext, ProMapperMessageType messageType) throws Exception {
 
 		logger.info("\n ######### marshalErrorResponseBody Start ##########");
-		
+
 		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd hh.mm.ss").create();
-		
+
 		JsonObject returnObject = new JsonObject();
-		
+
 		StringWriter sw = new StringWriter();
 		exception.printStackTrace(new PrintWriter(sw));
-			
-		JsonObject errorHeader = (JsonObject)gson.toJsonTree(requestContext.getUserDataContext().get("ErrorHeader"));
-					
+
+		JsonObject errorHeader = (JsonObject) gson.toJsonTree(requestContext.getUserDataContext().get("ErrorHeader"));
+
 		CustomHeader customheader = (CustomHeader) requestContext.getRequest().getHeader();
-		
+
 		errorHeader.addProperty("responseCode", customheader.getErrorHeader().getResponseCode());
 		errorHeader.addProperty("responseType", customheader.getErrorHeader().getResponseType());
 		errorHeader.addProperty("responseTitle", customheader.getErrorHeader().getResponseTitle());
 		errorHeader.addProperty("responseBasic", customheader.getErrorHeader().getResponseBasic());
-		errorHeader.addProperty("responseDtal", sw.toString());		
-		
+		errorHeader.addProperty("responseDtal", sw.toString());
+
 		returnObject.add("ErrorHeader", errorHeader);
-		
-		logger.info("\n ######### marshalErrorResponseBody errorHeader : "+returnObject.toString());
-		
+
+		logger.info("\n ######### marshalErrorResponseBody errorHeader : " + returnObject.toString());
+
 		logger.info("\n ######### marshalErrorResponseBody End ##########");
 		return returnObject.toString().getBytes();
 	}
@@ -76,34 +76,62 @@ public class CustomParser implements HttpBodyParser {
 	}
 
 	@Override
-	public byte[] marshalResponseBody(ProObjectHttpProtocol protocol, ServiceName serviceName, RequestContext requestContext,
-			ProMapperMessageType arg3) throws Exception {
+	public byte[] marshalResponseBody(ProObjectHttpProtocol protocol, ServiceName serviceName,
+			RequestContext requestContext, ProMapperMessageType msg_type) throws Exception {
 
 		logger.info("\n ######### marshalResponseBody Start ##########");
 		// TODO Auto-generated method stub
-
-		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd hh.mm.ss").create();
-
+		
 		JsonObject returnObject = new JsonObject();
-//		logger.info("\n ### marshalResponseBody requestContext : " + requestContext);
-
-		JsonElement userDataProHeader = gson.toJsonTree(requestContext.getUserDataContext().get("ProHeader"));
-		returnObject.add("ProHeader", userDataProHeader);
-
-		JsonElement userDataSysHeader = gson.toJsonTree(requestContext.getUserDataContext().get("SysHeader"));
-		returnObject.add("SysHeader", userDataSysHeader);
-
-		String dtoClassName = ServiceGroupManager.getServiceMeta(serviceName).getServiceOutputType().getResourceName();
-
-		JsonElement dto = gson.toJsonTree(protocol.getDto());
-		returnObject.add(dtoClassName, dto);
-		
-		logger.info("\n ### return ###  : \n" + "ProHeader : "+ returnObject.get("ProHeader")+"\n"
-				+ "\n" + "SysHeader : "+ returnObject.get("SysHeader") +"\n" + "\n" + "dto : "+ returnObject.get(dtoClassName) +"\n");
+		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd hh.mm.ss").create();
+		// 서블릿 호출
+		if (requestContext.getRequest().getWebHeader().get("msg-type") != null && 
+				requestContext.getRequest().getWebHeader().get("msg-type").equals("TEST")) {
+			logger.info("\n ######### 서블릿 호출 ###############");
 			
-		logger.info("\n ######### marshalResponseBody End ##########");
-		
-		return returnObject.toString().getBytes();
+
+			JsonElement userDataProHeader = gson.toJsonTree(requestContext.getUserDataContext().get("ProHeader"));
+			returnObject.add("ProHeader", userDataProHeader);
+
+			JsonElement userDataSysHeader = gson.toJsonTree(requestContext.getUserDataContext().get("SysHeader"));
+			returnObject.add("SysHeader", userDataSysHeader);
+
+			String dtoClassName = ServiceGroupManager.getServiceMeta(serviceName).getServiceOutputType()
+					.getResourceName();
+
+			JsonElement dto = gson.toJsonTree(protocol.getDto());
+			returnObject.add(dtoClassName, dto);
+
+			logger.info("\n ### return ###  : \n" + "ProHeader : " + returnObject.get("ProHeader") + "\n" + "\n"
+					+ "SysHeader : " + returnObject.get("SysHeader") + "\n" + "\n" + "dto : "
+					+ returnObject.get(dtoClassName) + "\n");
+
+			logger.info("\n ######### marshalResponseBody End ##########");
+
+			return returnObject.toString().getBytes();
+			
+		} else {
+
+			JsonElement userDataProHeader = gson.toJsonTree(requestContext.getUserDataContext().get("ProHeader"));
+			returnObject.add("ProHeader", userDataProHeader);
+
+			JsonElement userDataSysHeader = gson.toJsonTree(requestContext.getUserDataContext().get("SysHeader"));
+			returnObject.add("SysHeader", userDataSysHeader);
+
+			String dtoClassName = ServiceGroupManager.getServiceMeta(serviceName).getServiceOutputType()
+					.getResourceName();
+
+			JsonElement dto = gson.toJsonTree(protocol.getDto());
+			returnObject.add(dtoClassName, dto);
+
+			logger.info("\n ### return ###  : \n" + "ProHeader : " + returnObject.get("ProHeader") + "\n" + "\n"
+					+ "SysHeader : " + returnObject.get("SysHeader") + "\n" + "\n" + "dto : "
+					+ returnObject.get(dtoClassName) + "\n");
+
+			logger.info("\n ######### marshalResponseBody End ##########");
+
+			return returnObject.toString().getBytes();
+		}
 
 	}
 
@@ -112,7 +140,7 @@ public class CustomParser implements HttpBodyParser {
 			RequestContext requestContext, ProMapperMessageType arg3) throws Exception {
 
 		logger.info("\n ######### unmarshalRequestBody Start ##########");
-		
+
 //		검응용 requestContext 출력	
 //		logger.info("\n ######### unmarshalRequestBody RequestContext : \n"+ requestContext);
 		// TODO Auto-generated method stub
@@ -134,66 +162,65 @@ public class CustomParser implements HttpBodyParser {
 			CustomHeader customHeader = gson.fromJson(root.toString(), CustomHeader.class);
 			String dtoClassName = ServiceGroupManager.getServiceMeta(serviceName).getServiceInputType()
 					.getResourceName();
-			
-			 String[] fieldNames = { "ProHeader", "SysHeader", "ErrorHeader", dtoClassName };
-				for (String fieldName : fieldNames) {
-					JsonElement element = root.get(fieldName);
-					if (element != null && element.isJsonNull() == false) {
-						if ("ProHeader".equals(fieldName)) {
-				
-							AbstractMessage headerMsg = new ProHeaderMsgJson();
-							ProHeader proHeader = (ProHeader) headerMsg.unmarshal(element.toString().getBytes(charset));
-							
-							// ProHeader
-							logger.info("\n\n### ProHeader ####  \n" + element.toString()+"\n");
-							
-							userData.put("ProHeader", proHeader);
-							customHeader.setProHeader(proHeader);
-				
-						} else if ("SysHeader".equals(fieldName)) {
-							AbstractMessage headerMsg = new SysHeaderMsgJson();		
-							SysHeader sysHeader = (SysHeader) headerMsg.unmarshal(element.toString().getBytes(charset));
-							
-							// SysHeader
-							logger.info("\n\n### SysHeader ####  \n" + element.toString()+"\n");
-							
-							userData.put("SysHeader", sysHeader);
-							customHeader.setSysHeader(sysHeader);
-								
-						} 
-							else if ("ErrorHeader".equals(fieldName)) {
-						
-							AbstractMessage headerMsg = new ErrorHeaderMsgJson();		
-							ErrorHeader errorHeader = (ErrorHeader) headerMsg.unmarshal(element.toString().getBytes(charset));
-							
-							// SysHeader
-							logger.info("\n\n### ErrorHeader ####  \n" + element.toString()+"\n");
-							
-							userData.put("ErrorHeader", errorHeader);
-							customHeader.setErrorHeader(errorHeader);
-							}
-						
-						else if (dtoClassName.equals(fieldName)) {
+
+			String[] fieldNames = { "ProHeader", "SysHeader", "ErrorHeader", dtoClassName };
+			for (String fieldName : fieldNames) {
+				JsonElement element = root.get(fieldName);
+				if (element != null && element.isJsonNull() == false) {
+					if ("ProHeader".equals(fieldName)) {
+
+						AbstractMessage headerMsg = new ProHeaderMsgJson();
+						ProHeader proHeader = (ProHeader) headerMsg.unmarshal(element.toString().getBytes(charset));
+
+						// ProHeader
+						logger.info("\n\n### ProHeader ####  \n" + element.toString() + "\n");
+
+						userData.put("ProHeader", proHeader);
+						customHeader.setProHeader(proHeader);
+
+					} else if ("SysHeader".equals(fieldName)) {
+						AbstractMessage headerMsg = new SysHeaderMsgJson();
+						SysHeader sysHeader = (SysHeader) headerMsg.unmarshal(element.toString().getBytes(charset));
+
+						// SysHeader
+						logger.info("\n\n### SysHeader ####  \n" + element.toString() + "\n");
+
+						userData.put("SysHeader", sysHeader);
+						customHeader.setSysHeader(sysHeader);
+
+					} else if ("ErrorHeader".equals(fieldName)) {
+
+						AbstractMessage headerMsg = new ErrorHeaderMsgJson();
+						ErrorHeader errorHeader = (ErrorHeader) headerMsg
+								.unmarshal(element.toString().getBytes(charset));
+
+						// SysHeader
+						logger.info("\n\n### ErrorHeader ####  \n" + element.toString() + "\n");
+
+						userData.put("ErrorHeader", errorHeader);
+						customHeader.setErrorHeader(errorHeader);
+					}
+
+					else if (dtoClassName.equals(fieldName)) {
 						String dtoMsgJsonPackage = ServiceGroupManager.getServiceMeta(serviceName).getServiceInputType()
 								.getResourcePackage();
 						String dtoMsgJsonClassName = dtoMsgJsonPackage + "." + dtoClassName + "MsgJson";
 						Class cls = Class.forName(dtoMsgJsonClassName);
 						Object obj = cls.newInstance();
 						AbstractMessage dtoMsg = (AbstractMessage) obj;
-						
+
 						/*
-						 * dto 정보 로그 추가
-						 *  value : dtoInfo
+						 * dto 정보 로그 추가 value : dtoInfo
 						 */
 						// dtoClassName 헤더이름
 						// element.toString() 실제 input
 						// input.toString() 전체 값
 //						logger.info("\n\n### Input Dto info #### : " + element.toString());
-						
+
 						Object input = dtoMsg.unmarshal(element.toString().getBytes(charset));
-						
-						logger.info("\n\n### DTO ####  \n" + dtoClassName+"\n"+input.toString());
-						
+
+						logger.info("\n\n### DTO ####  \n" + dtoClassName + "\n" + input.toString());
+
 						protocol.setDto(input);
 					}
 					protocol.setHeader(customHeader);
@@ -213,10 +240,14 @@ public class CustomParser implements HttpBodyParser {
 		logger.info("\n ######### unmarshalRequestBody End ##########");
 		return protocol;
 	}
+
 	@Override
-	public ProObjectHttpProtocol unmarshalResponseBody(InputStream arg0, ServiceName arg1, RequestContext arg2,
-			ProMapperMessageType arg3) throws Exception {
+	public ProObjectHttpProtocol unmarshalResponseBody(InputStream arg0, ServiceName arg1,
+			RequestContext requestContext, ProMapperMessageType arg3) throws Exception {
 		logger.info("\n ######### unmarshalResponseBody ##########");
+
+		logger.info("\n ######### unmarshalResponseBody RequestContext : \n" + requestContext);
+
 		// TODO Auto-generated method stub
 		return null;
 	}

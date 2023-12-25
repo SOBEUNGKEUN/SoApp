@@ -38,7 +38,7 @@ public class RecieverCaller {
 		logger.info("########### sysHeader ####### : " + sysHeader);
 		logger.info("########### remoteAddress ####### : " + remoteAddress);
 		
-		String po21EntrySvc = proHeader.getAppName()+"/"+proHeader.getSgName()+"/"+proHeader.getSvcName()+"/"+proHeader.getFnName();
+		String po21EntrySvc = proHeader.getAppName()+"/"+proHeader.getSgName()+"/"+proHeader.getSvcName()+"_"+proHeader.getFnName();
 		
 		return po21EntrySvc;
 	}
