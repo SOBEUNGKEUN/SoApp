@@ -22,7 +22,7 @@ import com.tmax.proobject.runtime.memory.validator.ValidExecutor;
 
 @javax.annotation.Generated(
     value = "com.tmaxsoft.sts4.codegen.controller.POControllerGenerator",
-    date= "23. 12. 18. 오후 2:14",
+    date= "23. 12. 25. 오후 4:04",
     comments= "SG_EGController"
 )
 

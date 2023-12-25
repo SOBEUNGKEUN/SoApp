@@ -15,7 +15,7 @@ import java.util.Date;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.dto.DtoGenerator",
-	date= "23. 12. 18. 오후 2:14"
+	date= "23. 12. 25. 오후 4:04"
 )
 
 @com.tmax.proobject.core2.annotation.DataObject
@@ -271,6 +271,34 @@ public class BatchTestDTO extends DataObject implements Serializable, Cloneable 
     		this.parameterName = parameterName;
     	}
     }
+    private String inputPath = null;
+    private transient boolean inputPath_modified = false;
+    
+    public String getInputPath() {
+    	return inputPath;
+    }	
+    
+    public void setInputPath(String inputPath) {
+    	if (inputPath == null) {
+    		this.inputPath = null;
+    	} else {
+    		this.inputPath = inputPath;
+    	}
+    }
+    private String outputPath = null;
+    private transient boolean outputPath_modified = false;
+    
+    public String getOutputPath() {
+    	return outputPath;
+    }	
+    
+    public void setOutputPath(String outputPath) {
+    	if (outputPath == null) {
+    		this.outputPath = null;
+    	} else {
+    		this.outputPath = outputPath;
+    	}
+    }
     
     public String toString() {
     	StringBuilder buffer = new StringBuilder();
@@ -290,6 +318,8 @@ public class BatchTestDTO extends DataObject implements Serializable, Cloneable 
     	buffer.append("dateValue : ").append(dateValue).append("\n");   
     	buffer.append("parameterType : ").append(parameterType).append("\n");   
     	buffer.append("parameterName : ").append(parameterName).append("\n");   
+    	buffer.append("inputPath : ").append(inputPath).append("\n");   
+    	buffer.append("outputPath : ").append(outputPath).append("\n");   
     	return buffer.toString();
     }
     
@@ -325,6 +355,8 @@ public class BatchTestDTO extends DataObject implements Serializable, Cloneable 
     	}
     	this.setParameterType(__batchTestDTO.getParameterType());
     	this.setParameterName(__batchTestDTO.getParameterName());
+    	this.setInputPath(__batchTestDTO.getInputPath());
+    	this.setOutputPath(__batchTestDTO.getOutputPath());
     }
     
     
@@ -362,6 +394,10 @@ public class BatchTestDTO extends DataObject implements Serializable, Cloneable 
     		return getParameterType();
     	case "parameterName":
     		return getParameterName();
+    	case "inputPath":
+    		return getInputPath();
+    	case "outputPath":
+    		return getOutputPath();
     	default:
     		throw new FieldNotFoundException(fieldName);
     	}
@@ -415,6 +451,12 @@ public class BatchTestDTO extends DataObject implements Serializable, Cloneable 
     	case "parameterName":
     		setParameterName((String) fieldValue);
     		break;
+    	case "inputPath":
+    		setInputPath((String) fieldValue);
+    		break;
+    	case "outputPath":
+    		setOutputPath((String) fieldValue);
+    		break;
     	default:
     		throw new FieldNotFoundException(fieldName);
     		
@@ -424,7 +466,7 @@ public class BatchTestDTO extends DataObject implements Serializable, Cloneable 
     private static final Map<String, FieldProperty> fieldPropertyMap;
     
     static {
-    	fieldPropertyMap = new java.util.LinkedHashMap<String, FieldProperty>(15);
+    	fieldPropertyMap = new java.util.LinkedHashMap<String, FieldProperty>(17);
     	fieldPropertyMap.put("key", FieldProperty.builder().setPhysicalName("key").setLogicalName("key")
     	              .setType(FieldProperty.TYPE_OBJECT_STRING).setLength(20).setDecimal(-1).build());
     	fieldPropertyMap.put("value", FieldProperty.builder().setPhysicalName("value").setLogicalName("value")
@@ -455,6 +497,10 @@ public class BatchTestDTO extends DataObject implements Serializable, Cloneable 
     	              .setType(FieldProperty.TYPE_OBJECT_STRING).setLength(20).setDecimal(-1).build());
     	fieldPropertyMap.put("parameterName", FieldProperty.builder().setPhysicalName("parameterName").setLogicalName("parameterName")
     	              .setType(FieldProperty.TYPE_OBJECT_STRING).setLength(20).setDecimal(-1).build());
+    	fieldPropertyMap.put("inputPath", FieldProperty.builder().setPhysicalName("inputPath").setLogicalName("inputPath")
+    	              .setType(FieldProperty.TYPE_OBJECT_STRING).setLength(50).setDecimal(-1).build());
+    	fieldPropertyMap.put("outputPath", FieldProperty.builder().setPhysicalName("outputPath").setLogicalName("outputPath")
+    	              .setType(FieldProperty.TYPE_OBJECT_STRING).setLength(50).setDecimal(-1).build());
     }
     
     @Override
@@ -479,6 +525,8 @@ public class BatchTestDTO extends DataObject implements Serializable, Cloneable 
     	dateValue_modified = false;
     	parameterType_modified = false;
     	parameterName_modified = false;
+    	inputPath_modified = false;
+    	outputPath_modified = false;
     }
     
     @Override
@@ -529,6 +577,12 @@ public class BatchTestDTO extends DataObject implements Serializable, Cloneable 
     	case "parameterName":
     		parameterName_modified = false;
     		break;
+    	case "inputPath":
+    		inputPath_modified = false;
+    		break;
+    	case "outputPath":
+    		outputPath_modified = false;
+    		break;
       	default:
          	throw new FieldNotFoundException(fieldName);
        	}
@@ -567,12 +621,16 @@ public class BatchTestDTO extends DataObject implements Serializable, Cloneable 
         	modifiedFields.add("parameterType");
         if (this.parameterName_modified = true)
         	modifiedFields.add("parameterName");
+        if (this.inputPath_modified = true)
+        	modifiedFields.add("inputPath");
+        if (this.outputPath_modified = true)
+        	modifiedFields.add("outputPath");
         return modifiedFields;
     }
     
     @Override
     public boolean isModified() {
-    	if (key_modified || value_modified || servicename_modified || jobId_modified || jobName_modified || jobDate_modified || jobExecutionId_modified || batchCallType_modified || callType_modified || stringValue_modified || longValue_modified || doubleValue_modified || dateValue_modified || parameterType_modified || parameterName_modified) {
+    	if (key_modified || value_modified || servicename_modified || jobId_modified || jobName_modified || jobDate_modified || jobExecutionId_modified || batchCallType_modified || callType_modified || stringValue_modified || longValue_modified || doubleValue_modified || dateValue_modified || parameterType_modified || parameterName_modified || inputPath_modified || outputPath_modified) {
     		return true;
     	}
     	return false;
@@ -611,6 +669,10 @@ public class BatchTestDTO extends DataObject implements Serializable, Cloneable 
     		return parameterType_modified;
     	case "parameterName":
     		return parameterName_modified;
+    	case "inputPath":
+    		return inputPath_modified;
+    	case "outputPath":
+    		return outputPath_modified;
        	default:
       		throw new FieldNotFoundException(fieldName);
         }

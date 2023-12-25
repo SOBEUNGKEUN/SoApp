@@ -18,7 +18,7 @@ import proobject.com.google.gson.stream.MalformedJsonException;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.message.MessageGenerator",
-	date= "23. 12. 18. 오후 2:14"
+	date= "23. 12. 25. 오후 4:04"
 )
 
 @Message
@@ -145,6 +145,18 @@ public class BatchTestDTOMsgJson extends AbstractMessage {
     	writer.name("parameterName"); 
     	if (_BatchTestDTO.getParameterName() != null) {
     		writer.value(_BatchTestDTO.getParameterName());
+    	} else {
+    		writer.nullValue();
+    	}
+    	writer.name("inputPath"); 
+    	if (_BatchTestDTO.getInputPath() != null) {
+    		writer.value(_BatchTestDTO.getInputPath());
+    	} else {
+    		writer.nullValue();
+    	}
+    	writer.name("outputPath"); 
+    	if (_BatchTestDTO.getOutputPath() != null) {
+    		writer.value(_BatchTestDTO.getOutputPath());
     	} else {
     		writer.nullValue();
     	}
@@ -396,6 +408,24 @@ public class BatchTestDTOMsgJson extends AbstractMessage {
     		{	
     			if (reader.peek() != JsonToken.NULL) {
     				dto.setParameterName( reader.nextString());
+    			} else {
+    				reader.nextNull();
+    			}
+    			break;
+    		}	
+    		case "inputPath" :
+    		{	
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setInputPath( reader.nextString());
+    			} else {
+    				reader.nextNull();
+    			}
+    			break;
+    		}	
+    		case "outputPath" :
+    		{	
+    			if (reader.peek() != JsonToken.NULL) {
+    				dto.setOutputPath( reader.nextString());
     			} else {
     				reader.nextNull();
     			}
