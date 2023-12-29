@@ -14,7 +14,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 public class SpringBatchRepositoryConfig {
 	
 	@Autowired
-	private PlatformTransactionManager transactionManager;
+	@Qualifier(value= "SampleBatchDataSourceTransactionManager")
+	private PlatformTransactionManager sampleBatchDataSourceTransactionManager;
 	
 	@Autowired
 	@Qualifier(value= "SpringBatchBean")
@@ -24,7 +25,7 @@ public class SpringBatchRepositoryConfig {
 	public JobRepository getJobRepository() throws Exception{
 		JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
 		factory.setDataSource(datraSource);
-		factory.setTransactionManager(transactionManager);
+		factory.setTransactionManager(sampleBatchDataSourceTransactionManager);
 		factory.setDatabaseType("DB2");
 		factory.afterPropertiesSet();
 		return factory.getObject();

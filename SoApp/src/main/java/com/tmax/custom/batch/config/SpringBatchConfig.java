@@ -86,7 +86,7 @@ public class SpringBatchConfig {
 	 */
 	@Bean
 	public DataSourceTransactionManager SampleBatchDataSourceTransactionManager(@Qualifier("SampleBatchDataSource") DataSource SpringBatchBean) {
-		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(SpringBatchBean);
-		return transactionManager;
+		DataSourceTransactionManager sampletransactionManager = new DataSourceTransactionManager(SpringBatchBean);
+		return sampletransactionManager;
 	}
 }

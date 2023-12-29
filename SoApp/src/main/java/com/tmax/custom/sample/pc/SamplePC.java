@@ -34,7 +34,7 @@ public class SamplePC{
     @ServiceMethod
     public com.tmax.custom.sample.dto.SampleDTO select(com.tmax.custom.sample.dto.SampleDTO input) throws Throwable {
     		
-    	logger.info("\n##### select start ####");
+    	logger.info("\n##### select starts ####");
 		SampleDTO output = new SampleDTO();	
 		output = sampleEC.select(input);
 		logger.info("\n##### select end ####");

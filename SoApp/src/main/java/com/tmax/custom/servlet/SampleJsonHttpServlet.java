@@ -1,7 +1,10 @@
 package com.tmax.custom.servlet;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
@@ -11,9 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 
+import com.ctc.wstx.util.ExceptionUtil;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tmax.custom.header.ProHeader;
@@ -23,6 +28,7 @@ import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
 
 import proframe.util.StringUtils;
+import proobject.com.google.gson.Gson;
 import proobject.com.google.gson.JsonElement;
 import proobject.com.google.gson.JsonObject;
 import proobject.com.google.gson.JsonParser;
@@ -51,7 +57,7 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		try {
 			this._service(httpServletRequest, httpServletResponse);
 		} catch(Exception e) {
-			responseException(httpServletRequest, e);
+			responseException(httpServletResponse, e);
 		} catch(Throwable t) {
 			flushException(httpServletResponse, t);
 		}
@@ -109,6 +115,8 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		// Vadlidation 함수 생성예정
 		/*
 		 
+		 
+		 
 		 */
 		
 		// 헤더에 값 세팅
@@ -136,12 +144,10 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		responseResult = jsonCallReciever(httpRequest, reqProHeader, reqSysHeader, reqJsonformData,
 				resJsonformData, proHeader.toString(), sysHeader.toString(), queryString, remoteAdress, result);
 		
-		logger.info("######## _service_result : " + responseResult);
-		
-		logger.info("######## _service_httpResponse.getHeader : " + httpResponse.getHeader(responseResult));
-		logger.info("######## _service_httpResponse.getOutputStream : " + httpResponse.getOutputStream());
-		logger.info("######## _service_httpResponse.getWriter() : " + httpResponse.getWriter());
-		logger.info("######## After_service_httpResponse : " + httpResponse);
+		// 응답 전송
+		httpResponse.setContentType("applicatoin/json");
+		httpResponse.setCharacterEncoding("UTF-8");
+		httpResponse.getWriter().write(responseResult);
 		
 	}
 	
@@ -158,14 +164,47 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		return result;
 	}
 	
-	
+
 	// HttpServletRequest 예외처리
-	private void responseException(HttpServletRequest httpRequest, Exception e) {
+	private void responseException(HttpServletResponse httpResponse, Exception e) {
+		
+		logger.error("\n\n### [ "+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(System.currentTimeMillis()))+ " ] [HttpServletRequest]"
+				+ "[responseException] : internal Server Error");
+		logger.error(e.getMessage(), e);
+		
+		Gson gson = new Gson();
+		JsonObject jsonObject = new JsonObject();
+		
+		jsonObject.addProperty("ErrorCode", "-500");
+		jsonObject.addProperty("ErrorMsg", e.getMessage());
+		
+		String resJsonMsg = gson.toJson(jsonObject);
+		
+		try {
+			httpResponse.setContentType("application/json");
+			httpResponse.setCharacterEncoding("UTF-8");
+			httpResponse.getWriter().write(resJsonMsg);
+		}catch(Exception e2) {
+			flushException(httpResponse, e2);
+		}
 		
 	}
 	
 	// HttpServletResponse 예외처리
 	private void flushException(HttpServletResponse httpServletResponse, Throwable t) {
+		logger.error("\n\n### [ "+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(System.currentTimeMillis()))+ " ] [HttpServletRequest]"
+				+ "[flushException] : internal Server Error");
+		logger.error(t.getMessage(), t);
+		
+		try {
+			OutputStream os = httpServletResponse.getOutputStream();
+			os.write(ExceptionUtils.getStackTrace(t).getBytes());
+			os.flush();
+			os.close();
+		}catch(IOException e) {
+			logger.error(e.getMessage(), e);
+		}
+		
 		
 	}
 }
