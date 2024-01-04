@@ -16,6 +16,7 @@ import com.tmax.custom.header.ProHeader;
 import com.tmax.custom.header.ProHeaderMsgJson;
 import com.tmax.custom.header.SysHeader;
 import com.tmax.custom.header.SysHeaderMsgJson;
+import com.tmax.custom.util.CheckTime;
 import com.tmax.proobject.core2.service.ServiceName;
 import com.tmax.proobject.engine.application.servicegroup.ServiceGroupManager;
 import com.tmax.proobject.model.message.AbstractMessage;
@@ -35,6 +36,9 @@ import proobject.com.google.gson.JsonParser;
 public class CustomParser implements HttpBodyParser {
 
 	private ProObjectLogger logger = SystemLogger.getLogger();
+	
+	long startTime;
+	long endTime;
 
 	@Override
 	public byte[] marshalErrorResponseBody(Throwable exception, Object input, ServiceName serviceName,
@@ -130,6 +134,10 @@ public class CustomParser implements HttpBodyParser {
 
 			logger.info("\n ######### marshalResponseBody End ##########");
 
+			endTime = CheckTime.endTime();
+			
+			CheckTime.leadTime(endTime, startTime);
+			
 			return returnObject.toString().getBytes();
 		}
 
@@ -140,6 +148,8 @@ public class CustomParser implements HttpBodyParser {
 			RequestContext requestContext, ProMapperMessageType arg3) throws Exception {
 
 		logger.info("\n ######### unmarshalRequestBody Start ##########");
+		
+		startTime = CheckTime.startTime();
 
 //		검응용 requestContext 출력	
 //		logger.info("\n ######### unmarshalRequestBody RequestContext : \n"+ requestContext);
@@ -248,6 +258,7 @@ public class CustomParser implements HttpBodyParser {
 
 		logger.info("\n ######### unmarshalResponseBody RequestContext : \n" + requestContext);
 
+		CheckTime.startTime();
 		// TODO Auto-generated method stub
 		return null;
 	}

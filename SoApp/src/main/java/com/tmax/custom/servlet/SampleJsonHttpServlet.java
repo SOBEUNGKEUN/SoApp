@@ -18,7 +18,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 
-import com.ctc.wstx.util.ExceptionUtil;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tmax.custom.header.ProHeader;
@@ -100,9 +99,8 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		@SuppressWarnings("deprecation")
 		// string 데이터 받아서 json으로 파싱후 object에 담기
 		Object obj = parser.parse(tmpJsonformData);
-//		logger.info("######## obj : " + obj);
 		JsonObject jsonObj = (JsonObject)obj;
-//		logger.info("######## jsonObj : " + jsonObj);
+
 		
 		// 요청 헤더 가져오기
 		JsonElement tmpproheader = jsonObj.get("ProHeader");
@@ -112,12 +110,12 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		ProHeader reqProHeader = objectMapper.readValue(tmpproheader.toString(), ProHeader.class);
 		SysHeader reqSysHeader = objectMapper.readValue(tmpproheader.toString(), SysHeader.class);
 			
-		// Vadlidation 함수 생성예정
-		/*
-		 
-		 
-		 
-		 */
+		// Vadlidation Check
+		// DataSet 체크
+		validateDataSet(reqProHeader, reqSysHeader);
+		
+		// 필수 값 체크
+		validateField(reqProHeader.getName(), reqProHeader.getEnumber());
 		
 		// 헤더에 값 세팅
 		if(StringUtils.isNull(reqProHeader.getGuid()))
@@ -203,8 +201,27 @@ public class SampleJsonHttpServlet extends HttpServlet{
 			os.close();
 		}catch(IOException e) {
 			logger.error(e.getMessage(), e);
-		}
-		
-		
+		}	
 	}
+	
+	// Input 데이터 validaion 체크
+	public void validateDataSet(ProHeader reqProHeader, SysHeader reqSysHeader) throws Exception{
+		if (reqProHeader == null) {
+			throw new Exception("invalid ProHeader request");
+		} else if(reqSysHeader == null) {
+			throw new Exception("invalid SysHeader request");
+		}
+	}
+	
+	// 필수값 체크 (이름, 사번)
+	public void validateField(String name, int enumber) throws Exception{
+		if(name == null) {
+			logger.error("There is no name, Please check your name");
+			throw new Exception("invalid name request");
+		}else if(enumber == 0) {
+			logger.error("There is no enumber, Please check your enumber");
+			throw new Exception("invalid enumber request");
+		}
+	}
+	
 }

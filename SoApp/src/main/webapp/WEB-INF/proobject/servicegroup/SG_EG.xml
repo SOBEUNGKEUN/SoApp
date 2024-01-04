@@ -51,5 +51,44 @@
     </sg:service-meta>
     <sg:exclude-source-generation>false</sg:exclude-source-generation>
   </sg:service-resource>
+  <sg:service-resource resourceName="MessagebundlePC" resourcePackage="com.tmax.custom.messagebundle.pc">
+    <sg:service-meta>
+      <sg:service-name>MessagebundlePC_insert</sg:service-name>
+      <sg:service-method-name>insert</sg:service-method-name>
+      <sg:service-input-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:service-output-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/MessagebundlePC_insert"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>MessagebundlePC_delete</sg:service-name>
+      <sg:service-method-name>delete</sg:service-method-name>
+      <sg:service-input-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:service-output-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/MessagebundlePC_delete"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>MessagebundlePC_update</sg:service-name>
+      <sg:service-method-name>update</sg:service-method-name>
+      <sg:service-input-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:service-output-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/MessagebundlePC_update"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>MessagebundlePC_select</sg:service-name>
+      <sg:service-method-name>select</sg:service-method-name>
+      <sg:service-input-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:service-output-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/MessagebundlePC_select"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
   <sg:call-optimization-disable>false</sg:call-optimization-disable>
 </sg:servicegroup>
