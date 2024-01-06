@@ -12,6 +12,8 @@ public interface messagebundleDAO {
 	
 	public void updateTitle(messageDTO input) throws Exception;
 	
+	public void updateType(messageDTO input) throws Exception;
+	
 	public void delete(messageDTO input) throws Exception;
 
 	public messageDTO select (messageDTO input) throws Exception;

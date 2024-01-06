@@ -13,6 +13,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import com.tmax.custom.batch.dto.Emp;
 import com.tmax.custom.batch.handler.SampleBatchProcessor;
 import com.tmax.custom.batch.handler.SampleBatchReader;
+import com.tmax.custom.batch.handler.SampleBatchRemove;
 import com.tmax.custom.batch.handler.SampleBatchWriter;
 import com.tmax.proobject.runtime.logger.BatchLogger;
 import com.tmax.proobject.runtime.logger.ProObjectLogger;
@@ -41,8 +42,11 @@ public class CompressedBatchStep {
 	@Autowired
 	public SampleBatchReader sampleBatchReader;
 	
-
+	@Autowired
+	public SampleBatchRemove SampleBatchRemove;
+	
 	@Bean
+	// 압축,비압축 스텝
 	public Step compresseStep() throws MalformedURLException {
 		return stepBuilderFactory.get("compresseStep")
 				.<Emp, Emp>chunk(5)
@@ -53,4 +57,12 @@ public class CompressedBatchStep {
 				.build();
 	}
 	
+	@Bean
+	// 파일명 변경 step
+	public Step removeExtensionStep() {
+			return stepBuilderFactory.get("removeExtension")
+					.tasklet(SampleBatchRemove.removeExtension(null))
+					.transactionManager(transactionManager)
+					.build();
+	}
 }

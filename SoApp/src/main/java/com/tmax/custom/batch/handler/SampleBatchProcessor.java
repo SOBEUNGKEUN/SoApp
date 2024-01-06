@@ -20,12 +20,8 @@ public class SampleBatchProcessor{
 			Emp output = new Emp();
 			output.setEmpno(input.getEmpno());
 			output.setEname(input.getEname());
-			
-			
-			
+				
 			logger.info("Converting (" + input + ") into (" + output + ")");
-			
-			
 			
 			return output;
 		};

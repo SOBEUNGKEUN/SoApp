@@ -22,9 +22,6 @@ public class SampleBatchLogTasklet3 implements Tasklet {
 		Thread.sleep(3000);
 		logger.info("\n ### Step3 Log 3###");
 		Thread.sleep(3000);	
-		arg0.getStepExecution();
-		arg1.setComplete();
-		// TODO Auto-generated method stub
 		return RepeatStatus.FINISHED;
 	}
 

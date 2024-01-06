@@ -38,4 +38,16 @@ public class CompressedBatchJob {
 				.build();
 		
 	}
+	@Bean
+	public Job compressJobrmExtension() throws Exception {
+		return jobBuilderFactory.get("compressJobrmExtension")
+				.incrementer(new RunIdIncrementer())
+				.listener(sampleBatchListener)
+				.flow(sampleBatchInsertStep.SampleStep())
+				.next(compressedBatchStep.compresseStep())
+				.next(compressedBatchStep.removeExtensionStep())
+				.end()
+				.build();
+		
+	}
 }

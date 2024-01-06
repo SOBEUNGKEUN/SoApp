@@ -31,27 +31,31 @@ public class messagebundleEC {
 		
 		code = input.getCode();
 		messageDTO output = new messageDTO();
-		if(!input.getName().isEmpty() && !input.getTitle().isEmpty()){
-			messagebundleDAO.updateName(input);
-			messagebundleDAO.updateTitle(input);
-			output.setMessage(code+"title, name update 성공");	
+		
+		if(code.isEmpty()) {
+			output.setMessage("메세지 코드를 입력하세요.");
 			return output;
-		}
-		else if(!input.getName().isEmpty())
-		{
-			messagebundleDAO.updateName(input);
-			output.setMessage(code+"name update 성공");
+		}else if(input.getName().isEmpty() && input.getTitle().isEmpty() && input.getType().isEmpty()){
+			output.setMessage(code+"NAME , TITLE, TYPE값을 지정해주세요");
 			return output;
+		}else {
+			if(!input.getName().isEmpty())
+			{
+				logger.info("1번");
+				messagebundleDAO.updateName(input);	
+			}
+			if (!input.getTitle().isEmpty()) {
+				logger.info("2번");
+				messagebundleDAO.updateTitle(input);	
+			}
+			if (!input.getType().isEmpty()) {
+				logger.info("3번");
+				messagebundleDAO.updateType(input);
+			}
+			output.setMessage(code + "메세지 update 성공");
 		}
-		else if (!input.getTitle().isEmpty()) {
-			messagebundleDAO.updateTitle(input);
-			output.setMessage(code+"title update 성공");
-			return output;
-		}
-		else {
-			output.setMessage(code+"update 실패");
-			return output;
-		}
+		logger.info("4번");
+		return output;
 	}
 	
 	public messageDTO delete(messageDTO input) throws Throwable{

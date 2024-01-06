@@ -48,4 +48,13 @@ FROM(
 			WHERE KEY = CONCAT(#{code},'_MSG_TYPE')
 			) c
 </select>
+<update id="updateType" parameterType="com.tmax.custom.messagebundle.dto.messageDTO">
+UPDATE DB2USER.PO_MESSAGE_BUNDLE
+SET VALUE = #{type}
+WHERE key in (	
+	SELECT key 
+	FROM DB2USER.PO_MESSAGE_BUNDLE
+	WHERE KEY = CONCAT(#{code},'_MSG_TYPE')
+);
+</update>
 </mapper>
