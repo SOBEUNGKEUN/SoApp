@@ -88,6 +88,8 @@ public class TcpUtils {
 		requestEvent.setServiceMeta(serviceMeta);
 		EventManager.postEvent(requestEvent);
 
+		logger.info("\n########### waitobject  \n" +waitobject);
+		
 		Object result = null;
 		try {
 
@@ -100,6 +102,6 @@ public class TcpUtils {
 		}
 
 		logger.info("\n########### result  \n" +result);
-		return outputJsonData;
+		return result.toString();
 	}
 }

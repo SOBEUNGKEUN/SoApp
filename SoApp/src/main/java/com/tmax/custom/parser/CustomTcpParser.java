@@ -33,16 +33,24 @@ public class CustomTcpParser implements ProObjectBodyParser{
 	public byte[] marshalHeader(Header header, ServiceName serviceName, RequestContext requestContext, ProMapperMessageType proMapperMessageType)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
+		JsonObject returnObject = new JsonObject();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd hh.mm.ss").create();
 		logger.info("############# marshalHeader start ##############");
 		
 		logger.info("############# header : \n"+header);
 		logger.info("############# serviceName : \n"+serviceName);
 		logger.info("############# requestContext : \n"+requestContext);
-	
+
+		JsonElement userDataProHeader = gson.toJsonTree(requestContext.getUserDataContext().get("ProHeader"));
+		returnObject.add("ProHeader", userDataProHeader);
+
+		JsonElement userDataSysHeader = gson.toJsonTree(requestContext.getUserDataContext().get("SysHeader"));
+		returnObject.add("SysHeader", userDataSysHeader);
+		
+		logger.info("############# returnObject : \n"+returnObject);
 		
 		logger.info("############# marshalHeader end ##############");
-		return null;
+		return returnObject.toString().getBytes();
 	}
 
 	@Override
@@ -63,7 +71,19 @@ public class CustomTcpParser implements ProObjectBodyParser{
 		logger.info("############# serviceName : \n"+serviceName);
 		logger.info("############# requestContext : \n"+requestContext);
 		logger.info("############# marshalOutput end ##############");
-		return null;
+		
+
+		String dtoName = ServiceGroupManager.getServiceMeta(serviceName).getServiceInputType().getResourceName();
+		
+		Gson gson = new GsonBuilder().serializeNulls().create();
+
+		JsonObject returnObject = new JsonObject();
+		JsonElement outputElement = gson.toJsonTree(object);
+		returnObject.add(dtoName, outputElement);
+		
+		logger.info("############# returnObject : \n"+returnObject);
+		
+		return returnObject.toString().getBytes();
 	}
 
 	@Override
