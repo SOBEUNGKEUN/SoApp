@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tmax.custom.sample.dao.SampleDAO">
+<select id="select" parameterType="com.tmax.custom.sample.dto.SampleDTO" resultType="com.tmax.custom.sample.dto.SampleDTO">
+SELECT *
+  FROM DB2USER.EMP
+  WHERE EMPNO =#{empno};
+</select>
+<insert id="insert">
+INSERT INTO DB2USER.EMP(EMPNO, ENAME)
+VALUES (#{empno}, #{ename})
+</insert>
+<update id="update">
+UPDATE DB2USER.EMP
+SET ENAME = #{ename}
+WHERE EMPNO = #{empno}
+</update>
+<delete id="delete">
+DELETE FROM DB2USER.EMP
+WHERE EMPNO = #{empno}
+</delete>
+<select id="MemoryCal" parameterType="com.tmax.custom.sample.dto.MemoryCalDTO" resultType="com.tmax.custom.sample.dto.MemoryCalDTO">
+SELECT *
+  FROM DB2USER.EMP
+  WHERE ENAME =#{ename};
+</select>
+<select id="multiselect" resultMap="SampleresultMap" parameterType="com.tmax.custom.sample.dto.SampleDTO">
+SELECT * 
+  FROM EMP
+  WHERE ENAME LIKE CONCAT(#{ename},'%')
+</select>
+<resultMap id="SampleresultMap" type="com.tmax.custom.sample.dto.SampleDTO"><result property="empno" column="empno"></result>
+<result property="ename" column="ename"></result>
+</resultMap>
+<select id="selectError" parameterType="com.tmax.custom.sample.dto.SampleDTO" resultType="com.tmax.custom.sample.dto.SampleOUTDTO">
+SELECT *
+  FROM DB2USER.EMP
+  WHERE EMPNO =#{empno};
+</select>
+</mapper>

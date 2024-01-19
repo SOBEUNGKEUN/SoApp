@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sg:servicegroup xmlns:sg="http://www.tmax.co.kr/proobject/servicegroup" applicationName="SoApp" resourcePackage="com.tmax.custom.controller" serviceGroupName="SG_EG">
+  <sg:service-resource resourceName="SamplePC" resourcePackage="com.tmax.custom.sample.pc">
+    <sg:service-meta>
+      <sg:service-name>SamplePC_select</sg:service-name>
+      <sg:service-method-name>select</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SamplePC_select"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>SamplePC_insert</sg:service-name>
+      <sg:service-method-name>insert</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SamplePC_insert"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>SamplePC_update</sg:service-name>
+      <sg:service-method-name>update</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SamplePC_update"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>SamplePC_delete</sg:service-name>
+      <sg:service-method-name>delete</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SamplePC_delete"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>SamplePC_multiselect</sg:service-name>
+      <sg:service-method-name>multiselect</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleMultiDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SamplePC_multiselect"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>SamplePC_multiinsert</sg:service-name>
+      <sg:service-method-name>multiinsert</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleMultiDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SamplePC_multiinsert"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>SamplePC_timeout</sg:service-name>
+      <sg:service-method-name>timeout</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SamplePC_timeout"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:service-resource resourceName="BatchCall" resourcePackage="com.tmax.custom.batch.service">
+    <sg:service-meta>
+      <sg:service-name>BatchCall_service</sg:service-name>
+      <sg:service-method-name>service</sg:service-method-name>
+      <sg:service-input-type resourceName="BatchTestDTO" resourcePackage="com.tmax.custom.batch.dto" resourcePath="com/tmax/custom/batch/dto"/>
+      <sg:service-output-type resourceName="BatchTestDTO" resourcePackage="com.tmax.custom.batch.dto" resourcePath="com/tmax/custom/batch/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/BatchCall_service"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:service-resource resourceName="MessagebundlePC" resourcePackage="com.tmax.custom.messagebundle.pc">
+    <sg:service-meta>
+      <sg:service-name>MessagebundlePC_insert</sg:service-name>
+      <sg:service-method-name>insert</sg:service-method-name>
+      <sg:service-input-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:service-output-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/MessagebundlePC_insert"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>MessagebundlePC_delete</sg:service-name>
+      <sg:service-method-name>delete</sg:service-method-name>
+      <sg:service-input-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:service-output-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/MessagebundlePC_delete"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>MessagebundlePC_update</sg:service-name>
+      <sg:service-method-name>update</sg:service-method-name>
+      <sg:service-input-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:service-output-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/MessagebundlePC_update"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>MessagebundlePC_select</sg:service-name>
+      <sg:service-method-name>select</sg:service-method-name>
+      <sg:service-input-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:service-output-type resourceName="messageDTO" resourcePackage="com.tmax.custom.messagebundle.dto" resourcePath="com/tmax/custom/messagebundle/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/MessagebundlePC_select"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:service-resource resourceName="SyncAsyncCall" resourcePackage="com.tmax.custom.sample.pc">
+    <sg:service-meta>
+      <sg:service-name>SyncAsyncCall_sync</sg:service-name>
+      <sg:service-method-name>sync</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SyncAsyncCall_sync"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>SyncAsyncCall_async</sg:service-name>
+      <sg:service-method-name>async</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SyncAsyncCall_async"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:service-resource resourceName="SyncAsyn" resourcePackage="com.tmax.custom.sample.pc">
+    <sg:service-meta>
+      <sg:service-name>SyncAsyn_test</sg:service-name>
+      <sg:service-method-name>test</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SyncAsyn_test"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:service-resource resourceName="MemoryCalculatorPC" resourcePackage="com.tmax.custom.sample.pc">
+    <sg:service-meta>
+      <sg:service-name>MemoryCalculatorPC_test</sg:service-name>
+      <sg:service-method-name>test</sg:service-method-name>
+      <sg:service-input-type resourceName="MemoryCalDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="MemoryCalDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/MemoryCalculatorPC_test"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:service-resource resourceName="SampleCroPC" resourcePackage="com.tmax.custom.dataSourceTest.pc">
+    <sg:service-meta>
+      <sg:service-name>SampleCroPC_select</sg:service-name>
+      <sg:service-method-name>select</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SampleCroPC_select"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:service-resource resourceName="SampleMatPC" resourcePackage="com.tmax.custom.dataSourceTest.pc">
+    <sg:service-meta>
+      <sg:service-name>SampleMatPC_select</sg:service-name>
+      <sg:service-method-name>select</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SampleMatPC_select"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:service-resource resourceName="SampleCachePC" resourcePackage="com.tmax.custom.systemcontext.pc">
+    <sg:service-meta>
+      <sg:service-name>SampleCachePC_select</sg:service-name>
+      <sg:service-method-name>select</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleCacheDTO" resourcePackage="com.tmax.custom.systemcontext.dto" resourcePath="com/tmax/custom/systemcontext/dto"/>
+      <sg:service-output-type resourceName="SampleCacheDTO" resourcePackage="com.tmax.custom.systemcontext.dto" resourcePath="com/tmax/custom/systemcontext/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SampleCachePC_select"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:service-resource resourceName="TCPpoHeaderCall" resourcePackage="com.tmax.custom.sample.pc">
+    <sg:service-meta>
+      <sg:service-name>TCPpoHeaderCall_select</sg:service-name>
+      <sg:service-method-name>select</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/TCPpoHeaderCall_select"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:call-optimization-disable>false</sg:call-optimization-disable>
+</sg:servicegroup>

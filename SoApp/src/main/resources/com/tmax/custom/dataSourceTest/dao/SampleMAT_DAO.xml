@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tmax.custom.dataSourceTest.dao.SampleMAT_DAO">
+<select id="select" parameterType="com.tmax.custom.sample.dto.SampleDTO" resultType="com.tmax.custom.sample.dto.SampleDTO">
+SELECT *
+  FROM DB2USER.EMP
+  WHERE EMPNO =#{empno};
+</select>
+</mapper>

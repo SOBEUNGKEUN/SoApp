@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sg:servicegroup xmlns:sg="http://www.tmax.co.kr/proobject/servicegroup" applicationName="SoApp" resourcePackage="com.tmax.custom.controller" serviceGroupName="SG_CH">
+  <sg:service-resource resourceName="CustomHeaderTestPC" resourcePackage="com.tmax.custom.sample.pc">
+    <sg:service-meta>
+      <sg:service-name>CustomHeaderTestPC_select</sg:service-name>
+      <sg:service-method-name>select</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_CH/CustomHeaderTestPC_select"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>CustomHeaderTestPC_selectError</sg:service-name>
+      <sg:service-method-name>selectError</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleOUTDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_CH/CustomHeaderTestPC_selectError"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:service-resource resourceName="ServletCallPC" resourcePackage="com.tmax.custom.sample.pc">
+    <sg:service-meta>
+      <sg:service-name>ServletCallPC_testCall</sg:service-name>
+      <sg:service-method-name>testCall</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_CH/ServletCallPC_testCall"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:service-resource resourceName="TcpCallPC" resourcePackage="com.tmax.custom.sample.pc">
+    <sg:service-meta>
+      <sg:service-name>TcpCallPC_select</sg:service-name>
+      <sg:service-method-name>select</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_CH/TcpCallPC_select"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+      <sg:custom-proobject-parser>com.tmax.custom.parser.CustomTcpParser</sg:custom-proobject-parser>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
+  <sg:custom-header>com.tmax.custom.header.CustomHeader</sg:custom-header>
+  <sg:custom-http-parser>com.tmax.custom.parser.CustomParser</sg:custom-http-parser>
+  <sg:call-optimization-disable>false</sg:call-optimization-disable>
+</sg:servicegroup>

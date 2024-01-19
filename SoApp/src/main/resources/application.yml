@@ -1,0 +1,53 @@
+spring:
+#  main:
+#    lazy-initialization: true
+  application:
+    name: SoApp
+  profiles:
+    active: test
+  cloud:
+    config:
+      enabled: false
+jeus:
+  listener:
+    address: 0.0.0.0
+    port: 8089
+    
+  system-logging:
+    logger:
+    -
+      name: jeus
+      level: info
+    -
+      name: jeus.transaction
+      level: fine
+  jdbc:
+    data-source:
+      -
+        data-source-id: po21
+        data-source-class-name: com.ibm.db2.jcc.DB2ConnectionPoolDataSource
+        data-source-type: ConnectionPoolDataSource
+        server-name: 192.168.56.1
+        port-number: 25000
+        database-name: db2user
+        user: db2user
+        password: db2user
+        property:
+          -
+            name: driverType
+            type: java.lang.Integer
+            value: 4
+      -
+        data-source-id: nonXaDataSourcePO21
+        data-source-class-name: com.ibm.db2.jcc.DB2ConnectionPoolDataSource
+        data-source-type: ConnectionPoolDataSource
+        server-name: 192.168.56.1
+        port-number: 25000
+        database-name: db2user
+        user: db2user
+        password: db2user
+        property:
+          -
+            name: driverType
+            type: java.lang.Integer
+            value: 4

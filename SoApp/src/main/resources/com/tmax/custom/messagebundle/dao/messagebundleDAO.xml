@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tmax.custom.messagebundle.dao.messagebundleDAO">
+
+<insert id="insert" parameterType="com.tmax.custom.messagebundle.dto.messageDTO">
+INSERT INTO DB2USER.PO_MESSAGE_BUNDLE
+("KEY", "LOCALE", "VALUE")
+VALUES
+(CONCAT(#{code},'_MSG_NAME'),'KO', #{name}),
+(CONCAT(#{code},'_MSG_TITLE'),'KO', #{title}),
+(CONCAT(#{code},'_MSG_TYPE'),'KO', #{type});
+</insert>
+<delete id="delete" parameterType="com.tmax.custom.messagebundle.dto.messageDTO">
+DELETE FROM DB2USER.PO_MESSAGE_BUNDLE
+WHERE KEY like CONCAT(#{code},'%')
+</delete>
+<update id="updateName" parameterType="com.tmax.custom.messagebundle.dto.messageDTO">
+UPDATE DB2USER.PO_MESSAGE_BUNDLE
+SET VALUE = #{name}
+WHERE key in (	
+	SELECT key 
+	FROM DB2USER.PO_MESSAGE_BUNDLE
+	WHERE KEY = CONCAT(#{code},'_MSG_NAME')
+);
+</update>
+<update id="updateTitle">
+UPDATE DB2USER.PO_MESSAGE_BUNDLE
+SET VALUE = #{title}
+WHERE key in (	
+	SELECT key 
+	FROM DB2USER.PO_MESSAGE_BUNDLE
+	WHERE KEY = CONCAT(#{code},'_MSG_TITLE')
+);
+</update>
+<select id="select">
+SELECT a.value AS name, b.value AS title, c.value AS type	
+FROM(
+			SELECT value 
+			FROM DB2USER.PO_MESSAGE_BUNDLE
+			WHERE KEY = CONCAT(#{code},'_MSG_NAME')) a,
+			(	
+			SELECT value 
+			FROM DB2USER.PO_MESSAGE_BUNDLE
+			WHERE KEY = CONCAT(#{code},'_MSG_TITLE')) b,
+			(
+			SELECT value 
+			FROM DB2USER.PO_MESSAGE_BUNDLE
+			WHERE KEY = CONCAT(#{code},'_MSG_TYPE')
+			) c
+</select>
+<update id="updateType" parameterType="com.tmax.custom.messagebundle.dto.messageDTO">
+UPDATE DB2USER.PO_MESSAGE_BUNDLE
+SET VALUE = #{type}
+WHERE key in (	
+	SELECT key 
+	FROM DB2USER.PO_MESSAGE_BUNDLE
+	WHERE KEY = CONCAT(#{code},'_MSG_TYPE')
+);
+</update>
+</mapper>

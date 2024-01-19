@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tmax.custom.imagelog.ImagelogDAO">
+<insert id="insert" parameterType="com.tmax.proobject.service.imagelog.ImageLogDto">
+INSERT INTO DB2USER.IMAGELOG (APPLICATION, SERVICEGROUP, SERVICE, STATUS, DATA, DATASTRING, GUID, HEADER, HEADERSTRING, INSERT_TIME)
+VALUES (#{application, jdbcType=VARCHAR}, #{servicegroup, jdbcType=VARCHAR}, #{service, jdbcType=VARCHAR}, #{status, jdbcType=VARCHAR}, #{data, jdbcType=VARCHAR}, #{dataString, jdbcType=VARCHAR}, #{guid, jdbcType=VARCHAR}, #{header, jdbcType=VARCHAR}, #{headerString, jdbcType=VARCHAR}, #{insertTime, jdbcType=VARCHAR})
+</insert>
+</mapper>
