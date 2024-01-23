@@ -168,6 +168,13 @@
       <sg:service-method-name>select</sg:service-method-name>
       <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
       <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:transaction-config>
+        <value>nonXaTransactionManagerCRO_DS</value>
+        <isolation-level>ISOLATION_DEFAULT</isolation-level>
+        <propagation-behavior>PROPAGATION_REQUIRED</propagation-behavior>
+        <timeout>-1</timeout>
+        <read-only>false</read-only>
+      </sg:transaction-config>
       <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SampleCroPC_select"/>
       <sg:outbound>false</sg:outbound>
       <sg:messageTypes>JSON</sg:messageTypes>
@@ -180,6 +187,13 @@
       <sg:service-method-name>select</sg:service-method-name>
       <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
       <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:transaction-config>
+        <value>nonXaTransactionManagerMAT_DS</value>
+        <isolation-level>ISOLATION_DEFAULT</isolation-level>
+        <propagation-behavior>PROPAGATION_REQUIRED</propagation-behavior>
+        <timeout>-1</timeout>
+        <read-only>false</read-only>
+      </sg:transaction-config>
       <sg:urlMapping restType="POST" url="/SoApp/SG_EG/SampleMatPC_select"/>
       <sg:outbound>false</sg:outbound>
       <sg:messageTypes>JSON</sg:messageTypes>

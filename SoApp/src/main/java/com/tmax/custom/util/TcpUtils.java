@@ -1,6 +1,7 @@
 package com.tmax.custom.util;
 
 import java.io.IOException;
+import java.util.Map;
 
 import com.tmax.custom.header.CustomHeader;
 import com.tmax.custom.sample.dto.SampleDTO;
@@ -31,14 +32,7 @@ public class TcpUtils {
 	public String localJsCallReciever(CustomHeader customheader, JsonObject customHeaderJsonObj,JsonObject dtoObject, ServiceName serviceName, 
 			String reqDtoFullName) throws IOException {
 
-		String outputJsonData = "TCP 통신용 테스트 입니다.";
-
-		
-		
-		
-		
-		
-		
+		String outputJsonData = "TCP 통신용 테스트 입니다.";	
 		logger.info("########### localJsCallReciever 진입 ####### ");
 
 		logger.info("########### customheader #######\n" + customheader);
@@ -90,11 +84,12 @@ public class TcpUtils {
 
 		logger.info("\n########### waitobject  \n" +waitobject);
 		
-		Object result = null;
+		SampleDTO result = null;
+		SampleDTO output = new SampleDTO();
 		try {
 
 			if (waitobject.waitUntilDone(10000) != null) {
-				result = (Object[]) waitobject.get();
+				result =  (SampleDTO) waitobject.get();				
 			}
 
 		} catch (Throwable e) {
@@ -102,6 +97,19 @@ public class TcpUtils {
 		}
 
 		logger.info("\n########### result  \n" +result);
-		return result.toString();
+		
+		Map<String, Object> userData = requestContext.getUserDataContext();
+		
+		JsonObject returnObject = new JsonObject();
+		
+		JsonObject returnObjects = new JsonObject();
+		
+		returnObjects.add("ProHeader", returnObject = (JsonObject) requestContext.getUserDataContext().get("ProHeader"));
+		returnObjects.add("SysHeader", returnObject = (JsonObject) requestContext.getUserDataContext().get("SysHeader"));
+		returnObjects.add("dto", returnObject = (JsonObject) requestContext.getUserDataContext().get("output"));
+		
+		logger.info("\n########### returnObject  \n" +returnObjects);
+	
+		return returnObjects.toString();
 	}
 }

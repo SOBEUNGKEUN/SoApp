@@ -22,8 +22,8 @@ import com.tmax.proobject.runtime.logger.SystemLogger;
 @Service
 public class MemoryCalculatorPC{
     
-//	@Autowired
-	@Autowired(required=false)
+	@Autowired
+//	@Autowired(required=false)
 	SampleEC sampleEC;
 	
 	public ProObjectLogger logger = SystemLogger.getLogger();

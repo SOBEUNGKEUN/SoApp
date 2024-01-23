@@ -13,8 +13,8 @@ import com.tmax.custom.sample.dto.SampleOUTDTO;
 @Repository
 public class SampleEC {
 
-//	@Autowired
-	@Autowired(required=false)
+	@Autowired
+//	@Autowired(required=false)
 	SampleDAO sampleDAO;
 	
 	public SampleDTO select(SampleDTO input) throws Throwable{

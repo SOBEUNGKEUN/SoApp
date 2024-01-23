@@ -23,24 +23,6 @@
       <app:allocator-type>com.tmax.proobject.batch.node.StaticNodeWeightAllocator</app:allocator-type>
     </app:node>
   </app:batch-config>
-  <app:system-context>
-    <name>SampleSystemContext1</name>
-    <context-table>
-      <schema>db2user</schema>
-      <table>SAMPLE_SYSTEM_CONTEXT_1</table>
-    </context-table>
-    <context-initializer>com.tmax.custom.systemcontext.config.SampleContextInitializer1</context-initializer>
-    <default-datasource>po21</default-datasource>
-  </app:system-context>
-  <app:system-context>
-    <name>SampleSystemContext2</name>
-    <context-table>
-      <schema>db2user</schema>
-      <table>SAMPLE_SYSTEM_CONTEXT_2</table>
-    </context-table>
-    <context-initializer>com.tmax.custom.systemcontext.config.SampleContextInitializer2</context-initializer>
-    <default-datasource>po21</default-datasource>
-  </app:system-context>
   <app:cache-config>
     <cache-provider-config/>
   </app:cache-config>

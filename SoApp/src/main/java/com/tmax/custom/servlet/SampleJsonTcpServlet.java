@@ -30,6 +30,7 @@ import com.tmax.proobject.model.resource.ResourceBasicType;
 import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
 
+import proframe.util.StringUtils;
 import proobject.com.google.gson.Gson;
 import proobject.com.google.gson.GsonBuilder;
 import proobject.com.google.gson.JsonElement;
@@ -93,6 +94,12 @@ public class SampleJsonTcpServlet extends HttpServlet{
 		ProHeader reqProHeader = objectMapper.readValue(tmpproheader.toString(), ProHeader.class);
 		SysHeader reqSysHeader = objectMapper.readValue(tmpsysheader.toString(), SysHeader.class);
 		
+		// 헤더에 값 세팅
+		if(StringUtils.isNull(reqProHeader.getGuid()))
+			reqProHeader.setGuid("<94578fsd>");
+		if(StringUtils.isNull(reqSysHeader.getIp()))
+			reqSysHeader.setIp(httpRequest.getRemoteAddr());	
+		
 		// Custom 헤더
 		CustomHeader customheader = new CustomHeader();
 		customheader.setProHeader(reqProHeader);
@@ -124,9 +131,12 @@ public class SampleJsonTcpServlet extends HttpServlet{
 		
 		String response = caller.localJsCallReciever(customheader, customHeaderJsonObj, reqjsonDtoObject, serviceName, reqDtoFullName);
 		
+		
 		// 응답 전송
 		httpResponse.setContentType("applicatoin/json");
 		httpResponse.setCharacterEncoding("UTF-8");
+		
+		logger.info("######## httpResponse : " + httpResponse);
 		// tcp
 		httpResponse.getWriter().write(response);
 		

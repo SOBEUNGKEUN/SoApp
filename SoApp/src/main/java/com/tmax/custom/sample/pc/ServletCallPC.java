@@ -23,8 +23,8 @@ public class ServletCallPC {
 	 * @return com.tmax.custom.sample.dto.SampleDTO
 	 */
 
-//	@Autowired
-	@Autowired(required=false)
+	@Autowired
+//	@Autowired(required=false)
 	SampleEC sampleEC;
 
 	private ProObjectLogger logger = SystemLogger.getLogger();

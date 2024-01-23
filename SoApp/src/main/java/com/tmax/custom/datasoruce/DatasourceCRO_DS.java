@@ -11,18 +11,16 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.jndi.JndiTemplate;
 
-import com.tmax.custom.condition.CRO_DScondition;
 import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
 
 //@Conditional(SampleCondition.class)
-@Conditional(CRO_DScondition.class)
+//@Conditional(CRO_DScondition.class)
 @Configuration
 //@DependsOn("lazyInitializationBeanFactoryPostProcessorConfig")
 //@MapperScan(basePackages="com.tmax", annotationClass=DatabaseCRO_DS.class, sqlSessionFactoryRef="nonXaSqlSessionFactoryCRO_DS",lazyInitialization = "true")
@@ -53,6 +51,18 @@ public class DatasourceCRO_DS {
 			logger.info("\n### CRO_DS 데이터 소스 생성 성공 ###");
 			return jpfb;
 		}
+		
+		
+//		@Bean(name="nonXaDataSourceCRO_DS")
+//		public DataSource nonXaDataSource(@Qualifier("jndiTemplateCRO_DS")JndiTemplate jndiTemplateCRO_DS) { 
+//			JndiObjectFactoryBean jpfb = new JndiObjectFactoryBean();
+//			
+//			logger.info("\n### CRO_DS 데이터 소스 생성 ###");
+//			jpfb.setJndiName("CRO_DS");
+//			jpfb.setJndiTemplate(jndiTemplateCRO_DS);
+//			logger.info("\n### CRO_DS 데이터 소스 생성 성공 ###");
+//			return (DataSource) jpfb.getObject();
+//		}
 		
 	
 		@Bean(name="nonXaTransactionManagerCRO_DS")

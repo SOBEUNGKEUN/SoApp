@@ -11,18 +11,16 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.jndi.JndiTemplate;
 
-import com.tmax.custom.condition.MAT_DScondition;
 import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
 
 //@Conditional(SampleCondition.class)
-@Conditional(MAT_DScondition.class)
+//@Conditional(MAT_DScondition.class)
 @Configuration
 //@DependsOn("lazyInitializationBeanFactoryPostProcessorConfig")
 //@MapperScan(basePackages="com.tmax", annotationClass=DatabaseMAT_DS.class, sqlSessionFactoryRef="nonXaSqlSessionFactoryMAT_DS", lazyInitialization = "true")
@@ -58,6 +56,17 @@ public class DatasourceMAT_DS {
 			logger.info("\n### MAT_DS 데이터 소스 생성 성공 ###");
 			return jpfb;
 		}
+		
+//		@Bean(name="nonXaDataSourceMAT_DS")
+//		public DataSource nonXaDataSource(@Qualifier("jndiTemplateMAT_DS")JndiTemplate jndiTemplateMAT_DS) { 
+//			JndiObjectFactoryBean jpfb = new JndiObjectFactoryBean();
+//			
+//			logger.info("\n### MAT_DS 데이터 소스 생성 ###");
+//			jpfb.setJndiName("MAT_DS");
+//			jpfb.setJndiTemplate(jndiTemplateMAT_DS);
+//			logger.info("\n### MAT_DS 데이터 소스 생성 성공 ###"); 
+//			return (DataSource) jpfb.getObject();
+//		}
 		
 		@Bean(name="nonXaTransactionManagerMAT_DS")
 		public DataSourceTransactionManager nonXaTransactionManager(@Qualifier("nonXaDataSourceMAT_DS") DataSource nonXaDataSource) {

@@ -22,8 +22,8 @@ import com.tmax.proobject.runtime.logger.SystemLogger;
 @Service
 public class SampleCroPC{
     
-//	@Autowired
-	@Autowired(required=false)
+	@Autowired
+//	@Autowired(required=false)
 	SampleCroEC sampleCroEC;
 	
 	private ProObjectLogger logger = SystemLogger.getLogger();

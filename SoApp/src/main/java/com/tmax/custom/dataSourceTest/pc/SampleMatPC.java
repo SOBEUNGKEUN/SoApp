@@ -22,8 +22,8 @@ import com.tmax.proobject.runtime.logger.SystemLogger;
 @Service
 public class SampleMatPC{
 
-//	@Autowired
-	@Autowired(required=false)
+	@Autowired
+//	@Autowired(required=false)
 	SampleMatEC sampleMatEC;
 	
 	private ProObjectLogger logger = SystemLogger.getLogger();

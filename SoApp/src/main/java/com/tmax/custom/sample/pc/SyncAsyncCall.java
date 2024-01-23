@@ -23,8 +23,8 @@ import com.tmax.proobject.service.ServiceManager;
 @Service
 public class SyncAsyncCall{
     
-//	@Autowired
-	@Autowired(required=false)
+	@Autowired
+//	@Autowired(required=false)
 	ServiceManager serviceManager;
 	
 	ProObjectLogger logger = SystemLogger.getLogger();

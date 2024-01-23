@@ -81,7 +81,15 @@ public class CustomTcpParser implements ProObjectBodyParser{
 		JsonElement outputElement = gson.toJsonTree(object);
 		returnObject.add(dtoName, outputElement);
 		
+		logger.info("############# requestContext : \n"+requestContext);
+		
+		Map<String, Object> userData = requestContext.getUserDataContext();
+		
+		userData.put("output", returnObject);
+		
 		logger.info("############# returnObject : \n"+returnObject);
+		
+		logger.info("############# userData : \n"+userData);
 		
 		return returnObject.toString().getBytes();
 	}
@@ -156,7 +164,7 @@ public class CustomTcpParser implements ProObjectBodyParser{
 		logger.info("############# unmarshalHeader end ##############");
 		
 //		protocol.setHeader(customHeader);
-		
+//		userData.put("header", customHeader);
 		return customHeader;
 	}
 

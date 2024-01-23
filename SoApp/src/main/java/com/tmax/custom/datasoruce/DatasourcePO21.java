@@ -51,6 +51,18 @@ public class DatasourcePO21 {
 			return jpfb;
 		}
 		
+//		@Bean(name="nonXaDataSourcePO21")
+//		public DataSource nonXaDataSource(@Qualifier("jndiTemplatePO21")JndiTemplate jndiTemplatePO21) { 
+//			JndiObjectFactoryBean jpfb = new JndiObjectFactoryBean();
+//			
+//			logger.info("\n### PO21 데이터 소스 생성 ###");
+//			jpfb.setJndiName("po21");
+//			jpfb.setJndiTemplate(jndiTemplatePO21);
+//			
+//			logger.info("\n### PO21 데이터 소스 생성 성공 ###");
+//			return (DataSource) jpfb.getObject();
+//		}
+		
 		@Bean(name="nonXaTransactionManagerPO21")
 		public DataSourceTransactionManager nonXaTransactionManager(@Qualifier("nonXaDataSourcePO21") DataSource nonXaDataSource) {
 			DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(nonXaDataSource);

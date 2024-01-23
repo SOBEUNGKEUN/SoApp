@@ -1,8 +1,8 @@
 spring:
-#  main:
-#    lazy-initialization: true
   application:
     name: SoApp
+#  main:
+#    lazy-initialization: true
   profiles:
     active: test
   cloud:

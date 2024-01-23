@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sg:servicegroup xmlns:sg="http://www.tmax.co.kr/proobject/servicegroup" applicationName="SoApp" resourcePackage="com.tmax.custom.controller" serviceGroupName="SG_CH">
+  <sg:transaction-config>
+    <value>nonXaTransactionManagerPO21</value>
+    <isolation-level>ISOLATION_DEFAULT</isolation-level>
+    <propagation-behavior>PROPAGATION_REQUIRED</propagation-behavior>
+    <timeout>-1</timeout>
+    <read-only>false</read-only>
+  </sg:transaction-config>
   <sg:service-resource resourceName="CustomHeaderTestPC" resourcePackage="com.tmax.custom.sample.pc">
     <sg:service-meta>
       <sg:service-name>CustomHeaderTestPC_select</sg:service-name>

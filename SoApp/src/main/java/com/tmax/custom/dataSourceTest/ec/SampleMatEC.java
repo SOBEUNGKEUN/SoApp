@@ -9,8 +9,8 @@ import com.tmax.custom.sample.dto.SampleDTO;
 @Repository
 public class SampleMatEC {
 	
-//	@Autowired
-	@Autowired(required=false)
+	@Autowired
+//	@Autowired(required=false)
 	SampleMAT_DAO sampleMAT_DAO;
 	
 	public SampleDTO select(SampleDTO input) throws Throwable{

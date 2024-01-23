@@ -20,8 +20,8 @@ import com.tmax.proobject.core2.annotation.ServiceMethod;
 @Service
 public class MessagebundlePC{
 	
-//	@Autowired
-	@Autowired(required=false)
+	@Autowired
+//	@Autowired(required=false)
 	messagebundleEC messagebundleEC;
 
 	/**
