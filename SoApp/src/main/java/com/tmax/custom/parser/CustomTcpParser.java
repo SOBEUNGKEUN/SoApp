@@ -35,11 +35,7 @@ public class CustomTcpParser implements ProObjectBodyParser{
 		// TODO Auto-generated method stub
 		JsonObject returnObject = new JsonObject();
 		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd hh.mm.ss").create();
-		logger.info("############# marshalHeader start ##############");
-		
-		logger.info("############# header : \n"+header);
-		logger.info("############# serviceName : \n"+serviceName);
-		logger.info("############# requestContext : \n"+requestContext);
+		logger.info("############# marshalHeader start ##############");	
 
 		JsonElement userDataProHeader = gson.toJsonTree(requestContext.getUserDataContext().get("ProHeader"));
 		returnObject.add("ProHeader", userDataProHeader);
@@ -66,13 +62,7 @@ public class CustomTcpParser implements ProObjectBodyParser{
 			throws Exception {
 		// TODO Auto-generated method stub
 		logger.info("############# marshalOutput start ##############");
-		
-		logger.info("############# object : \n"+object);
-		logger.info("############# serviceName : \n"+serviceName);
-		logger.info("############# requestContext : \n"+requestContext);
-		logger.info("############# marshalOutput end ##############");
-		
-
+	
 		String dtoName = ServiceGroupManager.getServiceMeta(serviceName).getServiceInputType().getResourceName();
 		
 		Gson gson = new GsonBuilder().serializeNulls().create();
@@ -83,13 +73,11 @@ public class CustomTcpParser implements ProObjectBodyParser{
 		
 		logger.info("############# requestContext : \n"+requestContext);
 		
+		// dto 결과 tcpUtil로 전달을 위해 userData에 담기
 		Map<String, Object> userData = requestContext.getUserDataContext();
+		userData.put("outputElement", returnObject.get(dtoName));
 		
-		userData.put("output", returnObject);
-		
-		logger.info("############# returnObject : \n"+returnObject);
-		
-		logger.info("############# userData : \n"+userData);
+		logger.info("############# marshalOutput end ##############");
 		
 		return returnObject.toString().getBytes();
 	}
@@ -103,16 +91,9 @@ public class CustomTcpParser implements ProObjectBodyParser{
 
 		// TODO Auto-generated method stub
 		logger.info("############# unmarshalHeader start ##############");
-		
-		logger.info("############# requestContext ##############\n"+requestContext);
-		logger.info("############# inputHeaderBytes ##############"+inputHeaderBytes);
-		logger.info("############# inputHeaderString ##############"+ new String(inputHeaderBytes));
-	
 
 		CustomHeader customHeader = new CustomHeader();
-		
-//		String inputHeaderString = new String(inputHeaderBytes);
-		
+				
 		String charset = Charset.defaultCharset().toString();
 		Map<String, Object> userData = requestContext.getUserDataContext();
 		
@@ -129,8 +110,6 @@ public class CustomTcpParser implements ProObjectBodyParser{
 		
 		
 		try {		
-	
-//			CustomHeader customHeader = gson.fromJson(root.toString(), CustomHeader.class);
 			
 			String[] fieldNames = {"ProHeader", "SysHeader"};
 			

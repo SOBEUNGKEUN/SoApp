@@ -1,12 +1,10 @@
 package com.tmax.custom.util;
 
-import java.io.IOException;
-import java.util.Map;
-
 import com.tmax.custom.header.CustomHeader;
 import com.tmax.custom.sample.dto.SampleDTO;
 import com.tmax.proobject.core2.service.ServiceName;
 import com.tmax.proobject.core2.util.consistency.GUID;
+import com.tmax.proobject.engine.application.servicegroup.ServiceGroupManager;
 import com.tmax.proobject.engine.event.ServiceRequestEvent;
 import com.tmax.proobject.engine.manager.EventManager;
 import com.tmax.proobject.engine.manager.SystemManager;
@@ -30,14 +28,10 @@ public class TcpUtils {
 	private ProObjectLogger logger = SystemLogger.getLogger();
 
 	public String localJsCallReciever(CustomHeader customheader, JsonObject customHeaderJsonObj,JsonObject dtoObject, ServiceName serviceName, 
-			String reqDtoFullName) throws IOException {
+			String reqDtoFullName) throws Exception {
 
 		String outputJsonData = "TCP 통신용 테스트 입니다.";	
 		logger.info("########### localJsCallReciever 진입 ####### ");
-
-		logger.info("########### customheader #######\n" + customheader);
-		logger.info("########### customHeaderJsonObj #######\n" + customHeaderJsonObj);
-		logger.info("########### dtoObject #######\n" + dtoObject);
 		
 		NetworkContext requesterNetworkContext = NetworkContextImpl.LOCAL_NETWORK_CONTEXT;
 
@@ -49,7 +43,6 @@ public class TcpUtils {
 		proObjectRequest.setHeader(customheader);
 		proObjectRequest.setChannelType(StandardChannelType.PROOBJECT);
 
-		logger.info("\n########### After Header setting proObjectRequest :  \n" + proObjectRequest);
 
 		GUID guid = SystemManager.generateGUID();
 
@@ -62,9 +55,6 @@ public class TcpUtils {
 		WaitObjectResource waitobjectResource = new WaitObjectResource(requestContext, serviceMeta, CustomHeader.class,
 				new DefaultProObjectBodyParser());
 
-		logger.info("\n########### waitobjectResource :  \n" + waitobjectResource);
-
-
 		// Class.forName(dtoName) : SampleDTO.class
 		WaitObject waitobject = null;
 		try {
@@ -74,22 +64,31 @@ public class TcpUtils {
 			logger.error(e1);
 			e1.printStackTrace();
 		}
-		
-		logger.info("\n########### waitobject  \n" +waitobject);
-		
+				
 		ServiceRequestEvent requestEvent = new ServiceRequestEvent(serviceName, customHeaderJsonObj.toString().getBytes(),
 				dtoObject.toString().getBytes(), requestContext, waitobject);
 		requestEvent.setServiceMeta(serviceMeta);
-		EventManager.postEvent(requestEvent);
-
-		logger.info("\n########### waitobject  \n" +waitobject);
 		
-		SampleDTO result = null;
-		SampleDTO output = new SampleDTO();
+		// 서비스 이벤트 발생
+		// 이벤트 큐에 요청 전달
+		EventManager.postEvent(requestEvent);
+		
+		Object result = null;
+		
+		// 주석 하면 결과 
+		/*
+		 * {
+		    "ProHeader": null,
+		    "SysHeader": null,
+		    "SampleDTO": null
+			}
+		 * 
+		 */
+		
 		try {
 
 			if (waitobject.waitUntilDone(10000) != null) {
-				result =  (SampleDTO) waitobject.get();				
+				result = waitobject.get();				
 			}
 
 		} catch (Throwable e) {
@@ -98,18 +97,14 @@ public class TcpUtils {
 
 		logger.info("\n########### result  \n" +result);
 		
-		Map<String, Object> userData = requestContext.getUserDataContext();
-		
 		JsonObject returnObject = new JsonObject();
+		String dtoNameoutput = ServiceGroupManager.getServiceMeta(serviceName).getServiceOutputType().getResourceName();
 		
-		JsonObject returnObjects = new JsonObject();
+		// 헤더 및 dto 매핑
+		returnObject.add("ProHeader", (JsonObject) requestContext.getUserDataContext().get("ProHeader"));
+		returnObject.add("SysHeader", (JsonObject) requestContext.getUserDataContext().get("SysHeader"));	
+		returnObject.add(dtoNameoutput, (JsonObject) requestContext.getUserDataContext().get("outputElement"));
 		
-		returnObjects.add("ProHeader", returnObject = (JsonObject) requestContext.getUserDataContext().get("ProHeader"));
-		returnObjects.add("SysHeader", returnObject = (JsonObject) requestContext.getUserDataContext().get("SysHeader"));
-		returnObjects.add("dto", returnObject = (JsonObject) requestContext.getUserDataContext().get("output"));
-		
-		logger.info("\n########### returnObject  \n" +returnObjects);
-	
-		return returnObjects.toString();
+		return returnObject.toString();
 	}
 }
