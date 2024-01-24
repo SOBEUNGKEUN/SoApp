@@ -30,7 +30,6 @@ public class TcpUtils {
 	public String localJsCallReciever(CustomHeader customheader, JsonObject customHeaderJsonObj,JsonObject dtoObject, ServiceName serviceName, 
 			String reqDtoFullName) throws Exception {
 
-		String outputJsonData = "TCP 통신용 테스트 입니다.";	
 		logger.info("########### localJsCallReciever 진입 ####### ");
 		
 		NetworkContext requesterNetworkContext = NetworkContextImpl.LOCAL_NETWORK_CONTEXT;

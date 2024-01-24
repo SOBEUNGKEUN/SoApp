@@ -18,6 +18,7 @@ import org.springframework.jndi.JndiTemplate;
 
 import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
+import com.tmax.proobject.service.persistence.mybatis.spring.ProObjectSqlSessionFactoryBean;
 
 //@Conditional(SampleCondition.class)
 //@Conditional(MAT_DScondition.class)
@@ -76,13 +77,13 @@ public class DatasourceMAT_DS {
 		}
 		
 		@Bean(name="nonXaSqlSessionFactoryMAT_DS")
-		public SqlSessionFactory nonXaSqlSessionFactory(@Qualifier("nonXaDataSourceMAT_DS") DataSource nonXaDataSource, ApplicationContext applicationContext) throws Exception {
-			SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+		public ProObjectSqlSessionFactoryBean nonXaSqlSessionFactory(@Qualifier("nonXaDataSourceMAT_DS") DataSource nonXaDataSource, ApplicationContext applicationContext) throws Exception {
+			ProObjectSqlSessionFactoryBean factoryBean = new ProObjectSqlSessionFactoryBean();
 			
 			factoryBean.setDataSource(nonXaDataSource);
 			factoryBean.setConfigLocation(applicationContext.getResource("classpath:com/tmax/custom/datasource/DatasourceMAT_DS.xml"));
 			
-			return factoryBean.getObject();
+			return factoryBean;
 		}
 		
 		@Bean(name="nonXaSqlSessionTemplateMAT_DS")

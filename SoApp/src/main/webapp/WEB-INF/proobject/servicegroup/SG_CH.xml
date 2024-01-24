@@ -55,5 +55,6 @@
   </sg:service-resource>
   <sg:custom-header>com.tmax.custom.header.CustomHeader</sg:custom-header>
   <sg:custom-http-parser>com.tmax.custom.parser.CustomParser</sg:custom-http-parser>
+  <sg:custom-proobject-parser>com.tmax.custom.parser.CustomTcpParser</sg:custom-proobject-parser>
   <sg:call-optimization-disable>false</sg:call-optimization-disable>
 </sg:servicegroup>

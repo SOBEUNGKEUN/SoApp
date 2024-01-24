@@ -18,6 +18,7 @@ import org.springframework.jndi.JndiTemplate;
 
 import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
+import com.tmax.proobject.service.persistence.mybatis.spring.ProObjectSqlSessionFactoryBean;
 
 @Configuration
 //@DependsOn("lazyInitializationBeanFactoryPostProcessorConfig")
@@ -71,13 +72,13 @@ public class DatasourcePO21 {
 		}
 
 		@Bean(name="nonXaSqlSessionFactoryPO21")
-		public SqlSessionFactory nonXaSqlSessionFactory(@Qualifier("nonXaDataSourcePO21") DataSource nonXaDataSource, ApplicationContext applicationContext) throws Exception {
-			SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+		public ProObjectSqlSessionFactoryBean nonXaSqlSessionFactory(@Qualifier("nonXaDataSourcePO21") DataSource nonXaDataSource, ApplicationContext applicationContext) throws Exception {
+			ProObjectSqlSessionFactoryBean factoryBean = new ProObjectSqlSessionFactoryBean();
 			
 			factoryBean.setDataSource(nonXaDataSource);
 			factoryBean.setConfigLocation(applicationContext.getResource("classpath:com/tmax/custom/datasource/DatasourcePO21.xml"));
 			
-			return factoryBean.getObject();
+			return factoryBean;
 		}
 		
 		@Bean(name="nonXaSqlSessionTemplatePO21")

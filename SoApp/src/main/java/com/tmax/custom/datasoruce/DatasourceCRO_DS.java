@@ -5,7 +5,6 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,6 +17,7 @@ import org.springframework.jndi.JndiTemplate;
 
 import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
+import com.tmax.proobject.service.persistence.mybatis.spring.ProObjectSqlSessionFactoryBean;
 
 //@Conditional(SampleCondition.class)
 //@Conditional(CRO_DScondition.class)
@@ -73,13 +73,13 @@ public class DatasourceCRO_DS {
 		}
 		
 		@Bean(name="nonXaSqlSessionFactoryCRO_DS")
-		public SqlSessionFactory nonXaSqlSessionFactory(@Qualifier("nonXaDataSourceCRO_DS") DataSource nonXaDataSource, ApplicationContext applicationContext) throws Exception {
-			SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+		public ProObjectSqlSessionFactoryBean nonXaSqlSessionFactory(@Qualifier("nonXaDataSourceCRO_DS") DataSource nonXaDataSource, ApplicationContext applicationContext) throws Exception {
+			ProObjectSqlSessionFactoryBean factoryBean = new ProObjectSqlSessionFactoryBean();
 			
 			factoryBean.setDataSource(nonXaDataSource);
 			factoryBean.setConfigLocation(applicationContext.getResource("classpath:com/tmax/custom/datasource/DatasourceCRO_DS.xml"));
 			
-			return factoryBean.getObject();
+			return factoryBean;
 		}
 		
 		@Bean(name="nonXaSqlSessionTemplateCRO_DS")

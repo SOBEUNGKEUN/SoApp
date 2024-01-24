@@ -20,15 +20,19 @@ import org.springframework.util.StreamUtils;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tmax.custom.header.CustomHeader;
 import com.tmax.custom.header.ProHeader;
 import com.tmax.custom.header.SysHeader;
 import com.tmax.custom.util.RecieverCaller;
 import com.tmax.custom.util.TcpUtils;
+import com.tmax.proobject.core2.service.ServiceName;
+import com.tmax.proobject.engine.application.servicegroup.ServiceGroupManager;
 import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
 
 import proframe.util.StringUtils;
 import proobject.com.google.gson.Gson;
+import proobject.com.google.gson.GsonBuilder;
 import proobject.com.google.gson.JsonElement;
 import proobject.com.google.gson.JsonObject;
 import proobject.com.google.gson.JsonParser;
@@ -75,11 +79,7 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		// 결과
 		String result ="";
 		
-		String responseResult = "";
-		
-		// PO21 내부호출 프로토콜 변경 호출
-		String localresponseResult = "";
-		
+		String responseResult = "";	
 		
 		ServletInputStream inputStream = httpRequest.getInputStream(); 
 		logger.info("######## inputStream : " + inputStream);
@@ -113,7 +113,7 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		JsonElement tmpsysheader = jsonObj.get("SysHeader");
 
 		ProHeader reqProHeader = objectMapper.readValue(tmpproheader.toString(), ProHeader.class);
-		SysHeader reqSysHeader = objectMapper.readValue(tmpproheader.toString(), SysHeader.class);
+		SysHeader reqSysHeader = objectMapper.readValue(tmpsysheader.toString(), SysHeader.class);
 			
 		// Vadlidation Check
 		// DataSet 체크
@@ -143,21 +143,65 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		
 		logger.info("######## reqJsonformData : " + reqJsonformData);
 		
-		// PO21 호출
-		responseResult = jsonCallReciever(httpRequest, reqProHeader, reqSysHeader, reqJsonformData,
-				resJsonformData, proHeader.toString(), sysHeader.toString(), queryString, remoteAdress, result);
+		// =================== EventManager 통신용 로직 추가 ========================
 		
-		// localPo12 호출
-//		localresponseResult = localJsonCallReciever(httpRequest, reqProHeader, reqSysHeader, reqJsonformData,
-//				resJsonformData, proHeader.toString(), sysHeader.toString(), queryString, remoteAdress, result);
+		// Custom 헤더
+		CustomHeader customheader = new CustomHeader();
+		customheader.setProHeader(reqProHeader);
+		customheader.setSysHeader(reqSysHeader);
 		
+		// customHeaderJsonObj
+		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd hh.mm.ss").create();
+		JsonObject customHeaderJsonObj = (JsonObject) gson.toJsonTree(customheader);
 		
+		// dtoObject
+		// Service input dto type 가쟈오기 
+		String appName = reqProHeader.getAppName();
+		String sgName = reqProHeader.getSgName();
+		String svcName = reqProHeader.getSvcName();
+		String fnName = reqProHeader.getFnName();
+				
+		// 분기용 필드값
+		
+		String user = reqSysHeader.getUserId();
+		// ex): APP_CH.SG_CH.ServletCallPC_testCall
+		String reqServiceName = appName + "." + sgName + "." + svcName + "_" + fnName;
+		ServiceName serviceName = new ServiceName(reqServiceName);
+						
+		String reqtDtoType = ServiceGroupManager.getServiceMeta(serviceName).getServiceInputType().getResourceName();
+		String reqDtoPackage = ServiceGroupManager.getServiceMeta(serviceName).getServiceInputType().getResourcePackage();
+		String reqDtoFullName = reqDtoPackage+"."+reqtDtoType;
+		
+		JsonElement reqInputDto = jsonObj.get(reqtDtoType);
+		
+		JsonObject dtoObject = new JsonObject();
+		dtoObject.add(reqtDtoType, reqInputDto);
+
+		
+		logger.info("######## getUserId : "+user);
+		logger.info("######## equals : "+user.equals("lnijn320"));
+		
+		//분기 로직 추가
+		// userid : lnijn320 이면 http call
+		if(user.equals("lnijn320")) {
+			
+			logger.info("######## Http 통신 입니다 ##################");
+			
+			// PO21 호출 (http)
+			responseResult = jsonCallReciever(httpRequest, reqProHeader, reqSysHeader, reqJsonformData,
+					resJsonformData, proHeader.toString(), sysHeader.toString(), queryString, remoteAdress, result);
+		}else {
+			
+			logger.info("######## Tcp 통신 입니다 ##################");
+	
+			// localPo21 호출 (eventManager)
+			responseResult = eventManagerReciever(customheader, customHeaderJsonObj, dtoObject, serviceName,
+					reqDtoFullName, result);
+			}
 		// 응답 전송
 		httpResponse.setContentType("applicatoin/json");
 		httpResponse.setCharacterEncoding("UTF-8");
 		httpResponse.getWriter().write(responseResult);
-		// tcp
-//		httpResponse.getWriter().write(localresponseResult);
 		
 	}
 	
@@ -172,7 +216,17 @@ public class SampleJsonHttpServlet extends HttpServlet{
 		
 		return result;
 	}
-
+	
+	// JON EventManager 호출
+	private String eventManagerReciever(CustomHeader customheader, JsonObject customHeaderJsonObj,JsonObject dtoObject, ServiceName serviceName, 
+			String reqDtoFullName, String result) throws Exception{
+		
+		TcpUtils caller = new TcpUtils();
+		
+		result = caller.localJsCallReciever(customheader, customHeaderJsonObj, dtoObject, serviceName, reqDtoFullName);
+		
+		return result;
+	}
 	
 
 	// HttpServletRequest 예외처리
