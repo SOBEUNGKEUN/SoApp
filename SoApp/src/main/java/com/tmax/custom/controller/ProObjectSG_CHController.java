@@ -24,7 +24,7 @@ import com.tmax.proobject.runtime.memory.validator.ValidExecutor;
 
 @javax.annotation.Generated(
     value = "com.tmaxsoft.sts4.codegen.controller.POControllerGenerator",
-    date= "24. 1. 24. 오전 9:46",
+    date= "24. 1. 25. 오후 5:22",
     comments= "SG_CHController"
 )
 
@@ -65,13 +65,35 @@ public class ProObjectSG_CHController
             msgType = controllerInput.getRequestMessageType();
             
             if(parser instanceof DefaultProObjectBodyParser) {
-                headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                    case XML:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgXml();
+                        break;
+                    default:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setHeaderMsg(headerMsg);
             }
             header = ProObjectControllerUtil.unmarshalHeader(controllerInput.getHeaderBytes(), serviceName, requestContext, msgType, parser);
             
+            msgType = ProObjectControllerUtil.getMsgType(header.getInputMsgType(), controllerInput.getRequestMessageType());
+            
             if(parser instanceof DefaultProObjectBodyParser) {
-                dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                        break;
+                    case XML:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgXml();
+                        break;
+                    default:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setInputMsg(dtoMsg);
             }
             svcInput = (com.tmax.custom.sample.dto.SampleDTO) ProObjectControllerUtil.unmarshalInput(controllerInput.getServiceInputBytes(), serviceName, requestContext, msgType, parser);
@@ -100,13 +122,35 @@ public class ProObjectSG_CHController
             msgType = controllerInput.getResponseMessageType();
             
             if(parser instanceof DefaultProObjectBodyParser) {
-                headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                    case XML:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgXml();
+                        break;
+                    default:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setHeaderMsg(headerMsg);
             }
             controllerOutput.setHeaderBytes(ProObjectControllerUtil.marshalHeader(header, serviceName, requestContext, msgType, parser));
             
+            msgType = ProObjectControllerUtil.getMsgType(header.getOutputMsgType(), controllerInput.getResponseMessageType());
+            
             if(parser instanceof DefaultProObjectBodyParser) {
-                dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                        break;
+                    case XML:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgXml();
+                        break;
+                    default:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setOutputMsg(dtoMsg);
             }
             controllerOutput.setOutputBytes(ProObjectControllerUtil.marshalOutput(svcOutput, serviceName, requestContext, msgType, parser));
@@ -137,13 +181,35 @@ public class ProObjectSG_CHController
             msgType = controllerInput.getRequestMessageType();
             
             if(parser instanceof DefaultProObjectBodyParser) {
-                headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                    case XML:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgXml();
+                        break;
+                    default:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setHeaderMsg(headerMsg);
             }
             header = ProObjectControllerUtil.unmarshalHeader(controllerInput.getHeaderBytes(), serviceName, requestContext, msgType, parser);
             
+            msgType = ProObjectControllerUtil.getMsgType(header.getInputMsgType(), controllerInput.getRequestMessageType());
+            
             if(parser instanceof DefaultProObjectBodyParser) {
-                dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                        break;
+                    case XML:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgXml();
+                        break;
+                    default:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setInputMsg(dtoMsg);
             }
             svcInput = (com.tmax.custom.sample.dto.SampleDTO) ProObjectControllerUtil.unmarshalInput(controllerInput.getServiceInputBytes(), serviceName, requestContext, msgType, parser);
@@ -172,13 +238,35 @@ public class ProObjectSG_CHController
             msgType = controllerInput.getResponseMessageType();
             
             if(parser instanceof DefaultProObjectBodyParser) {
-                headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                    case XML:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgXml();
+                        break;
+                    default:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setHeaderMsg(headerMsg);
             }
             controllerOutput.setHeaderBytes(ProObjectControllerUtil.marshalHeader(header, serviceName, requestContext, msgType, parser));
             
+            msgType = ProObjectControllerUtil.getMsgType(header.getOutputMsgType(), controllerInput.getResponseMessageType());
+            
             if(parser instanceof DefaultProObjectBodyParser) {
-                dtoMsg = new com.tmax.custom.sample.dto.SampleOUTDTOMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleOUTDTOMsgJson();
+                        break;
+                    case XML:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleOUTDTOMsgXml();
+                        break;
+                    default:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleOUTDTOMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setOutputMsg(dtoMsg);
             }
             controllerOutput.setOutputBytes(ProObjectControllerUtil.marshalOutput(svcOutput, serviceName, requestContext, msgType, parser));
@@ -209,13 +297,35 @@ public class ProObjectSG_CHController
             msgType = controllerInput.getRequestMessageType();
             
             if(parser instanceof DefaultProObjectBodyParser) {
-                headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                    case XML:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgXml();
+                        break;
+                    default:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setHeaderMsg(headerMsg);
             }
             header = ProObjectControllerUtil.unmarshalHeader(controllerInput.getHeaderBytes(), serviceName, requestContext, msgType, parser);
             
+            msgType = ProObjectControllerUtil.getMsgType(header.getInputMsgType(), controllerInput.getRequestMessageType());
+            
             if(parser instanceof DefaultProObjectBodyParser) {
-                dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                        break;
+                    case XML:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgXml();
+                        break;
+                    default:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setInputMsg(dtoMsg);
             }
             svcInput = (com.tmax.custom.sample.dto.SampleDTO) ProObjectControllerUtil.unmarshalInput(controllerInput.getServiceInputBytes(), serviceName, requestContext, msgType, parser);
@@ -244,13 +354,35 @@ public class ProObjectSG_CHController
             msgType = controllerInput.getResponseMessageType();
             
             if(parser instanceof DefaultProObjectBodyParser) {
-                headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                    case XML:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgXml();
+                        break;
+                    default:
+                        headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setHeaderMsg(headerMsg);
             }
             controllerOutput.setHeaderBytes(ProObjectControllerUtil.marshalHeader(header, serviceName, requestContext, msgType, parser));
             
+            msgType = ProObjectControllerUtil.getMsgType(header.getOutputMsgType(), controllerInput.getResponseMessageType());
+            
             if(parser instanceof DefaultProObjectBodyParser) {
-                dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                switch (msgType) {
+                    case JSON:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                        break;
+                    case XML:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgXml();
+                        break;
+                    default:
+                        dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                        break;
+                }
                 ((DefaultProObjectBodyParser)parser).setOutputMsg(dtoMsg);
             }
             controllerOutput.setOutputBytes(ProObjectControllerUtil.marshalOutput(svcOutput, serviceName, requestContext, msgType, parser));

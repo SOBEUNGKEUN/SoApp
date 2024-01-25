@@ -85,4 +85,9 @@
       messagePath="com/tmax/custom/header"
       messageResourceName="CustomHeaderMsgJson"
       messageType="JSON"/>
+  <proobject:messageInfo
+      messageId="00009e645eda004fbedff40063b68be7"
+      messagePath="com/tmax/custom/header"
+      messageResourceName="CustomHeaderMsgXml"
+      messageType="XML"/>
 </proobject:dto>

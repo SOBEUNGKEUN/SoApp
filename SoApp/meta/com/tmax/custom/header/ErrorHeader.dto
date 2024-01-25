@@ -124,4 +124,9 @@
       messagePath="com/tmax/custom/header"
       messageResourceName="ErrorHeaderMsgJson"
       messageType="JSON"/>
+  <proobject:messageInfo
+      messageId="00009e645eda00d0fd7fcb0063b68be7"
+      messagePath="com/tmax/custom/header"
+      messageResourceName="ErrorHeaderMsgXml"
+      messageType="XML"/>
 </proobject:dto>

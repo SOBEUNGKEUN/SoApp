@@ -16,6 +16,7 @@
       <sg:urlMapping restType="POST" url="/SoApp/SG_CH/CustomHeaderTestPC_select"/>
       <sg:outbound>false</sg:outbound>
       <sg:messageTypes>JSON</sg:messageTypes>
+      <sg:messageTypes>XML</sg:messageTypes>
     </sg:service-meta>
     <sg:service-meta>
       <sg:service-name>CustomHeaderTestPC_selectError</sg:service-name>
@@ -25,6 +26,7 @@
       <sg:urlMapping restType="POST" url="/SoApp/SG_CH/CustomHeaderTestPC_selectError"/>
       <sg:outbound>false</sg:outbound>
       <sg:messageTypes>JSON</sg:messageTypes>
+      <sg:messageTypes>XML</sg:messageTypes>
     </sg:service-meta>
     <sg:exclude-source-generation>false</sg:exclude-source-generation>
   </sg:service-resource>
@@ -37,6 +39,7 @@
       <sg:urlMapping restType="POST" url="/SoApp/SG_CH/ServletCallPC_testCall"/>
       <sg:outbound>false</sg:outbound>
       <sg:messageTypes>JSON</sg:messageTypes>
+      <sg:messageTypes>XML</sg:messageTypes>
     </sg:service-meta>
     <sg:exclude-source-generation>false</sg:exclude-source-generation>
   </sg:service-resource>

@@ -13,7 +13,7 @@ import java.lang.Cloneable;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.dto.DtoGenerator",
-	date= "24. 1. 18. 오후 7:19"
+	date= "24. 1. 24. 오전 11:58"
 )
 
 @com.tmax.proobject.core2.annotation.DataObject

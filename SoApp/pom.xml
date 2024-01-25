@@ -40,7 +40,14 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-
+	
+		<!-- Util -->
+		<dependency>
+		  <groupId>org.json</groupId>
+		  <artifactId>org-json</artifactId>
+		  <version>1.0</version>
+		</dependency>
+		
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

@@ -61,4 +61,9 @@
       messagePath="com/tmax/custom/sample/dto"
       messageResourceName="SampleDTOMsgJson"
       messageType="JSON"/>
+  <proobject:messageInfo
+      messageId="000097c601c700292a60eb0063b68be7"
+      messagePath="com/tmax/custom/sample/dto"
+      messageResourceName="SampleDTOMsgXml"
+      messageType="XML"/>
 </proobject:dto>

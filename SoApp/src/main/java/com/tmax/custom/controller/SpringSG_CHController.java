@@ -24,7 +24,7 @@ import com.tmax.proobject.runtime.memory.validator.ValidExecutor;
 
 @javax.annotation.Generated(
     value = "com.tmaxsoft.sts4.codegen.controller.SpringControllerGenerator",
-    date= "24. 1. 24. 오전 9:46",
+    date= "24. 1. 25. 오후 5:22",
     comments= "SG_CHController"
 )
 
@@ -57,9 +57,29 @@ public class SpringSG_CHController
         
         HttpBodyParser parser = ParserUtil.getHttpBodyParser(serviceName);
         if (parser instanceof DefaultHttpBodyParser) {
-            headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+            switch (msgType) {
+                case JSON:
+                    headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                    break;
+                case XML:
+                    headerMsg = new com.tmax.custom.header.CustomHeaderMsgXml();
+                    break;
+                default:
+                    headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                    break;
+            }
             ((DefaultHttpBodyParser)parser).setHeaderMsg(headerMsg);
-            dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+            switch (msgType) {
+                case JSON:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                    break;
+                case XML:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgXml();
+                    break;
+                default:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                    break;
+            }
             ((DefaultHttpBodyParser)parser).setInputMsg(dtoMsg);
         }
         
@@ -93,7 +113,17 @@ public class SpringSG_CHController
         protocol.setDto(svcOutput);
         
         if (parser instanceof DefaultHttpBodyParser) {
-            dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+            switch (msgType) {
+                case JSON:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                    break;
+                case XML:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgXml();
+                    break;
+                default:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                    break;
+            }
             ((DefaultHttpBodyParser)parser).setOutputMsg(dtoMsg);
         }
         byte[] outputProtocolBytes = SpringControllerUtil.marshalResponseBody(protocol, serviceName, requestContext, msgType, parser);
@@ -117,9 +147,29 @@ public class SpringSG_CHController
         
         HttpBodyParser parser = ParserUtil.getHttpBodyParser(serviceName);
         if (parser instanceof DefaultHttpBodyParser) {
-            headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+            switch (msgType) {
+                case JSON:
+                    headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                    break;
+                case XML:
+                    headerMsg = new com.tmax.custom.header.CustomHeaderMsgXml();
+                    break;
+                default:
+                    headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                    break;
+            }
             ((DefaultHttpBodyParser)parser).setHeaderMsg(headerMsg);
-            dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+            switch (msgType) {
+                case JSON:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                    break;
+                case XML:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgXml();
+                    break;
+                default:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                    break;
+            }
             ((DefaultHttpBodyParser)parser).setInputMsg(dtoMsg);
         }
         
@@ -153,7 +203,17 @@ public class SpringSG_CHController
         protocol.setDto(svcOutput);
         
         if (parser instanceof DefaultHttpBodyParser) {
-            dtoMsg = new com.tmax.custom.sample.dto.SampleOUTDTOMsgJson();
+            switch (msgType) {
+                case JSON:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleOUTDTOMsgJson();
+                    break;
+                case XML:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleOUTDTOMsgXml();
+                    break;
+                default:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleOUTDTOMsgJson();
+                    break;
+            }
             ((DefaultHttpBodyParser)parser).setOutputMsg(dtoMsg);
         }
         byte[] outputProtocolBytes = SpringControllerUtil.marshalResponseBody(protocol, serviceName, requestContext, msgType, parser);
@@ -177,9 +237,29 @@ public class SpringSG_CHController
         
         HttpBodyParser parser = ParserUtil.getHttpBodyParser(serviceName);
         if (parser instanceof DefaultHttpBodyParser) {
-            headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+            switch (msgType) {
+                case JSON:
+                    headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                    break;
+                case XML:
+                    headerMsg = new com.tmax.custom.header.CustomHeaderMsgXml();
+                    break;
+                default:
+                    headerMsg = new com.tmax.custom.header.CustomHeaderMsgJson();
+                    break;
+            }
             ((DefaultHttpBodyParser)parser).setHeaderMsg(headerMsg);
-            dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+            switch (msgType) {
+                case JSON:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                    break;
+                case XML:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgXml();
+                    break;
+                default:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                    break;
+            }
             ((DefaultHttpBodyParser)parser).setInputMsg(dtoMsg);
         }
         
@@ -213,7 +293,17 @@ public class SpringSG_CHController
         protocol.setDto(svcOutput);
         
         if (parser instanceof DefaultHttpBodyParser) {
-            dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+            switch (msgType) {
+                case JSON:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                    break;
+                case XML:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgXml();
+                    break;
+                default:
+                    dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                    break;
+            }
             ((DefaultHttpBodyParser)parser).setOutputMsg(dtoMsg);
         }
         byte[] outputProtocolBytes = SpringControllerUtil.marshalResponseBody(protocol, serviceName, requestContext, msgType, parser);

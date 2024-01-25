@@ -16,7 +16,7 @@ import proobject.com.google.gson.stream.JsonToken;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.message.MessageGenerator",
-	date= "24. 1. 10. 오전 11:07"
+	date= "24. 1. 24. 오전 11:58"
 )
 
 @Message

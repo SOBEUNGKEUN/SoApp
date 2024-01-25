@@ -4,6 +4,10 @@
 		<servlet-name>json</servlet-name>
 		<servlet-class>com.tmax.custom.servlet.SampleJsonHttpServlet</servlet-class>
 	</servlet>
+		<servlet>
+		<servlet-name>xml</servlet-name>
+		<servlet-class>com.tmax.custom.servlet.SampleXmlHttpServlet</servlet-class>
+	</servlet>
 	<servlet>
 		<servlet-name>jsonTcp</servlet-name>
 		<servlet-class>com.tmax.custom.servlet.SampleJsonTcpServlet</servlet-class>
@@ -11,6 +15,10 @@
 	<servlet-mapping>
 		<servlet-name>json</servlet-name>
 		<url-pattern>/JSON/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>xml</servlet-name>
+		<url-pattern>/XML/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>jsonTcp</servlet-name>

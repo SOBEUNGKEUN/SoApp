@@ -80,4 +80,9 @@
       messagePath="com/tmax/custom/header"
       messageResourceName="SysHeaderMsgJson"
       messageType="JSON"/>
+  <proobject:messageInfo
+      messageId="00009e645eda007fdae5100063b68be7"
+      messagePath="com/tmax/custom/header"
+      messageResourceName="SysHeaderMsgXml"
+      messageType="XML"/>
 </proobject:dto>

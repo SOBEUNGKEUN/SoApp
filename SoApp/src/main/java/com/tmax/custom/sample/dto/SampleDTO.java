@@ -4,7 +4,6 @@ import com.tmax.proobject.model.dataobject.DataObject;
 import com.tmax.proobject.model.dataobject.FieldProperty;
 import com.tmax.proobject.model.exception.FieldNotFoundException;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.lang.Cloneable;
 
 @javax.annotation.Generated(
 	value = "com.tmaxsoft.sts4.codegen.dto.DtoGenerator",
-	date= "23. 12. 5. 오후 7:37"
+	date= "24. 1. 24. 오전 11:57"
 )
 
 @com.tmax.proobject.core2.annotation.DataObject
