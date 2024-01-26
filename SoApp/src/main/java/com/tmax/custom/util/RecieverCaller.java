@@ -25,7 +25,7 @@ public class RecieverCaller {
 		try {
 			// 호출
 			// http 방식
-			outputJsonData = HttpUtils.requestPostData(httpurl, reqJsonformData, "UTF-8");
+			outputJsonData = HttpUtils.requestPostData(httpurl, reqJsonformData, "UTF-8", "json");
 		} catch (IOException e) {
 			throw e;
 		}
@@ -35,7 +35,7 @@ public class RecieverCaller {
 	public String xmlCallReciever(String reqJXmlformData, String queryString, String remoteAddress, ProHeader proHeader,
 			SysHeader sysHeader) throws IOException {
 
-		logger.info("######## jsCallReciever Start ########## ");
+		logger.info("######## xmlCallReciever Start ########## ");
 
 		String outputXmlData = "";
 		String poServletUrl = getPoServletUrl(proHeader, sysHeader, remoteAddress);
@@ -47,7 +47,7 @@ public class RecieverCaller {
 		try {
 			// 호출
 			// http 방식
-			outputXmlData = HttpUtils.requestPostData(httpurl, reqJXmlformData, "UTF-8");
+			outputXmlData = HttpUtils.requestPostData(httpurl, reqJXmlformData, "UTF-8", "xml");
 		} catch (IOException e) {
 			throw e;
 		}

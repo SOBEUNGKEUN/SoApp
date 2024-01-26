@@ -104,13 +104,15 @@ public class CustomParser implements HttpBodyParser {
 
 	@Override
 	public byte[] marshalResponseBody(ProObjectHttpProtocol protocol, ServiceName serviceName,
-			RequestContext requestContext, ProMapperMessageType msg_type) throws Exception {
+			RequestContext requestContext, ProMapperMessageType messageType) throws Exception {
 
 		logger.info("\n ######### marshalResponseBody Start ##########");
 		
 		// TODO Auto-generated method stub
 		
 		String msgType = requestContext.getRequest().getWebHeader().get("content-type");
+		
+//		String msg_Type = requestContext.getRequest().getWebHeader().get("Msg-Type");
 		
 		JsonObject returnObject = new JsonObject();
 		
@@ -205,22 +207,25 @@ public class CustomParser implements HttpBodyParser {
 		
 		logger.info("\n ######### unmarshalRequestBody RequestContext content-type ##########\n"+requestContext.getRequest().getWebHeader().get("content-type"));
 		
-		String msg_type = requestContext.getRequest().getWebHeader().get("content-type");
+		String msgtype = requestContext.getRequest().getWebHeader().get("content-type");
+		
+//		String msg_type = requestContext.getRequest().getWebHeader().get("Msg-Type");
 		
 		// contet_type 으로 입력전문 분기 처리
-		if(msg_type.equals("application/json")) {
+		if(msgtype.equals("application/json")) {
 			logger.info("\n ######### JSON 입니다. ##########");
 		}
 			
-		else if(msg_type.equals("application/xml")) {
+		else if(msgtype.equals("application/xml")) {
 			logger.info("\n ######### XML 입니다. ##########");
 		}
 			
+//		application/xml
 		
 		startTime = CheckTime.startTime();
 
 		// JSON
-		if(msg_type.equals("application/json")) {
+		if(msgtype.equals("application/json")) {
 			ProObjectHttpProtocol protocol = new ProObjectHttpProtocol();
 	
 			Map<String, Object> userData = requestContext.getUserDataContext();
@@ -311,6 +316,8 @@ public class CustomParser implements HttpBodyParser {
 		}
 		// XML
 		else {
+			
+			logger.info("\n ######### unmarshalRequestBody xml inputStream :  \n"+inputStream);
 			
 			//InputStream inputStream, ServiceName serviceName, RequestContext requestContext, ProMapperMessageType arg3
 			

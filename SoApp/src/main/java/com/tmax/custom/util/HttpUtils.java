@@ -16,7 +16,7 @@ import com.tmax.proobject.runtime.logger.SystemLogger;
 
 public class HttpUtils {
 
-	public static String requestPostData(String address, String data, String encChar) throws IOException {
+	public static String requestPostData(String address, String data, String encChar, String specGb) throws IOException {
 
 		ProObjectLogger logger = SystemLogger.getLogger();
 
@@ -33,7 +33,7 @@ public class HttpUtils {
 			logger.info("##### address : " + address);
 			logger.info("##### encChar : " + encChar);
 			// connection
-			conn = getNewHttpURLConnection(address, encChar);
+			conn = getNewHttpURLConnection(address, encChar, specGb);
 			logger.info("##### conn : " + conn);
 			// outputStream
 			os = writeOutputStream(data, encChar, conn);
@@ -74,7 +74,7 @@ public class HttpUtils {
 	}
 
 	// URLConnection
-	private static HttpURLConnection getNewHttpURLConnection(String address, String encChar)
+	private static HttpURLConnection getNewHttpURLConnection(String address, String encChar, String specGb)
 			throws MalformedURLException, IOException, ProtocolException {
 		ProObjectLogger logger = SystemLogger.getLogger();
 		// specGB : ws, tf, xp 플랫폼 구분자
@@ -89,10 +89,17 @@ public class HttpUtils {
 		conn.setConnectTimeout(10000);
 		conn.setReadTimeout(300000);
 
-		conn.setRequestProperty("Content-Type", "application/json");
-		conn.setRequestProperty("Msg-Type", "TEST");
+		if ("json".equals(specGb)) {
+			logger.info("############# Msg-Typ json setting ###########");
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty("Msg-Type", "json");
+		} else if("xml".equals(specGb)) {
+			logger.info("############# Msg-Typ xml setting ###########");
+			conn.setRequestProperty("Content-Type", "application/xml");
+			conn.setRequestProperty("Msg-Type", "xml");
+		}
+		
 		conn.setRequestProperty("charset", encChar);
-
 		logger.info("##### conn : " + conn);
 
 		return conn;

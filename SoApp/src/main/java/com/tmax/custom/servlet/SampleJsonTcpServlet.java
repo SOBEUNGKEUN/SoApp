@@ -26,7 +26,6 @@ import com.tmax.custom.header.SysHeader;
 import com.tmax.custom.util.TcpUtils;
 import com.tmax.proobject.core2.service.ServiceName;
 import com.tmax.proobject.engine.application.servicegroup.ServiceGroupManager;
-import com.tmax.proobject.model.resource.ResourceBasicType;
 import com.tmax.proobject.runtime.logger.ProObjectLogger;
 import com.tmax.proobject.runtime.logger.SystemLogger;
 
