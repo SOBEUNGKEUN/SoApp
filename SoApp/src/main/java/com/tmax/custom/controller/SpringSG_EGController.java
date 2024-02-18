@@ -10,6 +10,7 @@ import com.tmax.custom.dataSourceTest.pc.SampleCroPC;
 import com.tmax.custom.dataSourceTest.pc.SampleMatPC;
 import com.tmax.custom.systemcontext.pc.SampleCachePC;
 import com.tmax.custom.sample.pc.TCPpoHeaderCall;
+import com.tmax.custom.sample.pc.MsCallPC;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ import com.tmax.proobject.runtime.memory.validator.ValidExecutor;
 
 @javax.annotation.Generated(
     value = "com.tmaxsoft.sts4.codegen.controller.SpringControllerGenerator",
-    date= "24. 1. 22. 오후 3:43",
+    date= "24. 2. 18. 오후 2:35",
     comments= "SG_EGController"
 )
 
@@ -67,6 +68,9 @@ public class SpringSG_EGController
     
     @Autowired
     TCPpoHeaderCall _TCPpoHeaderCall;
+    
+    @Autowired
+    MsCallPC _MsCallPC;
     
     @Autowired
     ValidExecutor validExecutor;
@@ -1241,6 +1245,126 @@ public class SpringSG_EGController
         try {
             validExecutor.execute(svcInput);
             svcOutput = _TCPpoHeaderCall.select(svcInput);
+            validExecutor.execute(svcOutput);
+        } catch (Throwable e) {
+            try {
+                SpringControllerUtil.handleServiceError(serviceName, requestContext, svcInput, e);
+            } catch (Throwable e1) {
+                Exception exception = new ProObjectServiceErrorHandlingException(e1);
+                throw exception;
+            }
+            
+            SpringControllerUtil.writeErrorResponseBody(response, e, svcInput, serviceName, requestContext, msgType, parser);
+            ServiceContextHolder.removeServiceContext();
+            return;
+        }
+        
+        SpringControllerUtil.handlePostService(serviceName, requestContext, svcInput, svcOutput);
+        ServiceContextHolder.removeServiceContext();
+        
+        protocol.setDto(svcOutput);
+        
+        if (parser instanceof DefaultHttpBodyParser) {
+            dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+            ((DefaultHttpBodyParser)parser).setOutputMsg(dtoMsg);
+        }
+        byte[] outputProtocolBytes = SpringControllerUtil.marshalResponseBody(protocol, serviceName, requestContext, msgType, parser);
+        SpringControllerUtil.writeServiceResponseBody(response, outputProtocolBytes, serviceName, requestContext);
+        
+        return;
+    }
+    
+    @RequestMapping(value="/SoApp/SG_EG/MsCallPC_call", method=RequestMethod.POST)
+    public void executeMsCallPC_call(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        ProMapperMessageType msgType = SpringControllerUtil.getMsgType(request, response);
+        
+        ProObjectHttpProtocol protocol = null;
+        ServiceName serviceName = new ServiceName("SoApp.SG_EG.MsCallPC_call");
+       
+        RequestContext requestContext = SpringControllerUtil.createRequestContext(serviceName);
+        ServiceContextHolder.getServiceContext().setRequestContext(requestContext);
+        
+        AbstractMessage headerMsg = null;
+        AbstractMessage dtoMsg = null;
+        
+        HttpBodyParser parser = ParserUtil.getHttpBodyParser(serviceName);
+        if (parser instanceof DefaultHttpBodyParser) {
+            headerMsg = new com.tmax.proobject.model.context.HeaderMsgJson();
+            ((DefaultHttpBodyParser)parser).setHeaderMsg(headerMsg);
+            dtoMsg = new com.sample.dto.SampleDTOMsgJson();
+            ((DefaultHttpBodyParser)parser).setInputMsg(dtoMsg);
+        }
+        
+        protocol = SpringControllerUtil.unmarshalRequestBody(request.getInputStream(), serviceName, requestContext, msgType, parser);
+        
+        com.sample.dto.SampleDTO svcInput = (com.sample.dto.SampleDTO)protocol.getDto();
+        com.sample.dto.SampleDTO svcOutput = null;
+        
+        SpringControllerUtil.handlePreService(serviceName, requestContext, svcInput);
+        
+        try {
+            validExecutor.execute(svcInput);
+            svcOutput = _MsCallPC.call(svcInput);
+            validExecutor.execute(svcOutput);
+        } catch (Throwable e) {
+            try {
+                SpringControllerUtil.handleServiceError(serviceName, requestContext, svcInput, e);
+            } catch (Throwable e1) {
+                Exception exception = new ProObjectServiceErrorHandlingException(e1);
+                throw exception;
+            }
+            
+            SpringControllerUtil.writeErrorResponseBody(response, e, svcInput, serviceName, requestContext, msgType, parser);
+            ServiceContextHolder.removeServiceContext();
+            return;
+        }
+        
+        SpringControllerUtil.handlePostService(serviceName, requestContext, svcInput, svcOutput);
+        ServiceContextHolder.removeServiceContext();
+        
+        protocol.setDto(svcOutput);
+        
+        if (parser instanceof DefaultHttpBodyParser) {
+            dtoMsg = new com.sample.dto.SampleDTOMsgJson();
+            ((DefaultHttpBodyParser)parser).setOutputMsg(dtoMsg);
+        }
+        byte[] outputProtocolBytes = SpringControllerUtil.marshalResponseBody(protocol, serviceName, requestContext, msgType, parser);
+        SpringControllerUtil.writeServiceResponseBody(response, outputProtocolBytes, serviceName, requestContext);
+        
+        return;
+    }
+    
+    @RequestMapping(value="/SoApp/SG_EG/MsCallPC_SoAppCall", method=RequestMethod.POST)
+    public void executeMsCallPC_SoAppCall(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        ProMapperMessageType msgType = SpringControllerUtil.getMsgType(request, response);
+        
+        ProObjectHttpProtocol protocol = null;
+        ServiceName serviceName = new ServiceName("SoApp.SG_EG.MsCallPC_SoAppCall");
+       
+        RequestContext requestContext = SpringControllerUtil.createRequestContext(serviceName);
+        ServiceContextHolder.getServiceContext().setRequestContext(requestContext);
+        
+        AbstractMessage headerMsg = null;
+        AbstractMessage dtoMsg = null;
+        
+        HttpBodyParser parser = ParserUtil.getHttpBodyParser(serviceName);
+        if (parser instanceof DefaultHttpBodyParser) {
+            headerMsg = new com.tmax.proobject.model.context.HeaderMsgJson();
+            ((DefaultHttpBodyParser)parser).setHeaderMsg(headerMsg);
+            dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+            ((DefaultHttpBodyParser)parser).setInputMsg(dtoMsg);
+        }
+        
+        protocol = SpringControllerUtil.unmarshalRequestBody(request.getInputStream(), serviceName, requestContext, msgType, parser);
+        
+        com.tmax.custom.sample.dto.SampleDTO svcInput = (com.tmax.custom.sample.dto.SampleDTO)protocol.getDto();
+        com.tmax.custom.sample.dto.SampleDTO svcOutput = null;
+        
+        SpringControllerUtil.handlePreService(serviceName, requestContext, svcInput);
+        
+        try {
+            validExecutor.execute(svcInput);
+            svcOutput = _MsCallPC.SoAppCall(svcInput);
             validExecutor.execute(svcOutput);
         } catch (Throwable e) {
             try {

@@ -224,5 +224,26 @@
     </sg:service-meta>
     <sg:exclude-source-generation>false</sg:exclude-source-generation>
   </sg:service-resource>
+  <sg:service-resource resourceName="MsCallPC" resourcePackage="com.tmax.custom.sample.pc">
+    <sg:service-meta>
+      <sg:service-name>MsCallPC_call</sg:service-name>
+      <sg:service-method-name>call</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.sample.dto" resourcePath="com/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.sample.dto" resourcePath="com/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/MsCallPC_call"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:service-meta>
+      <sg:service-name>MsCallPC_SoAppCall</sg:service-name>
+      <sg:service-method-name>SoAppCall</sg:service-method-name>
+      <sg:service-input-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:service-output-type resourceName="SampleDTO" resourcePackage="com.tmax.custom.sample.dto" resourcePath="com/tmax/custom/sample/dto"/>
+      <sg:urlMapping restType="POST" url="/SoApp/SG_EG/MsCallPC_SoAppCall"/>
+      <sg:outbound>false</sg:outbound>
+      <sg:messageTypes>JSON</sg:messageTypes>
+    </sg:service-meta>
+    <sg:exclude-source-generation>false</sg:exclude-source-generation>
+  </sg:service-resource>
   <sg:call-optimization-disable>false</sg:call-optimization-disable>
 </sg:servicegroup>

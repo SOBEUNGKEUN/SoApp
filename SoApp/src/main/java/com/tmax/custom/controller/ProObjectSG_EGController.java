@@ -10,6 +10,7 @@ import com.tmax.custom.dataSourceTest.pc.SampleCroPC;
 import com.tmax.custom.dataSourceTest.pc.SampleMatPC;
 import com.tmax.custom.systemcontext.pc.SampleCachePC;
 import com.tmax.custom.sample.pc.TCPpoHeaderCall;
+import com.tmax.custom.sample.pc.MsCallPC;
 import org.springframework.stereotype.Component;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ import com.tmax.proobject.runtime.memory.validator.ValidExecutor;
 
 @javax.annotation.Generated(
     value = "com.tmaxsoft.sts4.codegen.controller.POControllerGenerator",
-    date= "24. 1. 22. 오후 3:43",
+    date= "24. 2. 18. 오후 2:35",
     comments= "SG_EGController"
 )
 
@@ -68,6 +69,9 @@ public class ProObjectSG_EGController
     
     @Autowired
     TCPpoHeaderCall _TCPpoHeaderCall;
+    
+    @Autowired
+    MsCallPC _MsCallPC;
     
     @Autowired
     ValidExecutor validExecutor;
@@ -1480,6 +1484,150 @@ public class ProObjectSG_EGController
         try {
             validExecutor.execute(svcInput);
             svcOutput = _TCPpoHeaderCall.select(svcInput);
+            validExecutor.execute(svcOutput);
+        } catch (Throwable e) {
+            ProObjectControllerUtil.handleServiceError(serviceName, requestContext, svcInput, e, fromDispatcher); // rollback
+            throw e;
+        }
+        
+        ProObjectControllerUtil.handlePostService(serviceName, requestContext, svcInput, svcOutput, fromDispatcher); // commit
+        ServiceContextHolder.removeServiceContext();
+        
+        if (fromDispatcher) {
+            ProObjectControllerOutput controllerOutput = new ProObjectControllerOutput();
+            
+            msgType = controllerInput.getResponseMessageType();
+            
+            if(parser instanceof DefaultProObjectBodyParser) {
+                headerMsg = new com.tmax.proobject.model.context.HeaderMsgJson();
+                ((DefaultProObjectBodyParser)parser).setHeaderMsg(headerMsg);
+            }
+            controllerOutput.setHeaderBytes(ProObjectControllerUtil.marshalHeader(header, serviceName, requestContext, msgType, parser));
+            
+            if(parser instanceof DefaultProObjectBodyParser) {
+                dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                ((DefaultProObjectBodyParser)parser).setOutputMsg(dtoMsg);
+            }
+            controllerOutput.setOutputBytes(ProObjectControllerUtil.marshalOutput(svcOutput, serviceName, requestContext, msgType, parser));
+            
+            return controllerOutput;
+        } else {
+            return svcOutput;
+        }
+    }
+    public Object executeMsCallPC_call(ProObjectControllerInput controllerInput) throws Throwable {
+        ServiceName serviceName = controllerInput.getServiceName();
+        RequestContext requestContext = controllerInput.getRequestContext();
+        ServiceContextHolder.getServiceContext().setRequestContext(requestContext);
+    
+        boolean fromDispatcher = (controllerInput.getServiceInputObject() == null);
+    
+        com.sample.dto.SampleDTO svcInput;
+        Header header = null;
+        ProMapperMessageType msgType;
+        
+        ProObjectBodyParser parser = null;
+        AbstractMessage headerMsg = null;
+        AbstractMessage dtoMsg = null;
+        
+        if (fromDispatcher) {
+            parser = ParserUtil.getProObjectBodyParser(serviceName);
+            
+            msgType = controllerInput.getRequestMessageType();
+            
+            if(parser instanceof DefaultProObjectBodyParser) {
+                headerMsg = new com.tmax.proobject.model.context.HeaderMsgJson();
+                ((DefaultProObjectBodyParser)parser).setHeaderMsg(headerMsg);
+            }
+            header = ProObjectControllerUtil.unmarshalHeader(controllerInput.getHeaderBytes(), serviceName, requestContext, msgType, parser);
+            
+            if(parser instanceof DefaultProObjectBodyParser) {
+                dtoMsg = new com.sample.dto.SampleDTOMsgJson();
+                ((DefaultProObjectBodyParser)parser).setInputMsg(dtoMsg);
+            }
+            svcInput = (com.sample.dto.SampleDTO) ProObjectControllerUtil.unmarshalInput(controllerInput.getServiceInputBytes(), serviceName, requestContext, msgType, parser);
+        } else {
+            svcInput = (com.sample.dto.SampleDTO) controllerInput.getServiceInputObject();
+        }
+        
+        ProObjectControllerUtil.handlePreService(serviceName, requestContext, svcInput); // getTransaction
+        
+        com.sample.dto.SampleDTO svcOutput = null;
+        try {
+            validExecutor.execute(svcInput);
+            svcOutput = _MsCallPC.call(svcInput);
+            validExecutor.execute(svcOutput);
+        } catch (Throwable e) {
+            ProObjectControllerUtil.handleServiceError(serviceName, requestContext, svcInput, e, fromDispatcher); // rollback
+            throw e;
+        }
+        
+        ProObjectControllerUtil.handlePostService(serviceName, requestContext, svcInput, svcOutput, fromDispatcher); // commit
+        ServiceContextHolder.removeServiceContext();
+        
+        if (fromDispatcher) {
+            ProObjectControllerOutput controllerOutput = new ProObjectControllerOutput();
+            
+            msgType = controllerInput.getResponseMessageType();
+            
+            if(parser instanceof DefaultProObjectBodyParser) {
+                headerMsg = new com.tmax.proobject.model.context.HeaderMsgJson();
+                ((DefaultProObjectBodyParser)parser).setHeaderMsg(headerMsg);
+            }
+            controllerOutput.setHeaderBytes(ProObjectControllerUtil.marshalHeader(header, serviceName, requestContext, msgType, parser));
+            
+            if(parser instanceof DefaultProObjectBodyParser) {
+                dtoMsg = new com.sample.dto.SampleDTOMsgJson();
+                ((DefaultProObjectBodyParser)parser).setOutputMsg(dtoMsg);
+            }
+            controllerOutput.setOutputBytes(ProObjectControllerUtil.marshalOutput(svcOutput, serviceName, requestContext, msgType, parser));
+            
+            return controllerOutput;
+        } else {
+            return svcOutput;
+        }
+    }
+    public Object executeMsCallPC_SoAppCall(ProObjectControllerInput controllerInput) throws Throwable {
+        ServiceName serviceName = controllerInput.getServiceName();
+        RequestContext requestContext = controllerInput.getRequestContext();
+        ServiceContextHolder.getServiceContext().setRequestContext(requestContext);
+    
+        boolean fromDispatcher = (controllerInput.getServiceInputObject() == null);
+    
+        com.tmax.custom.sample.dto.SampleDTO svcInput;
+        Header header = null;
+        ProMapperMessageType msgType;
+        
+        ProObjectBodyParser parser = null;
+        AbstractMessage headerMsg = null;
+        AbstractMessage dtoMsg = null;
+        
+        if (fromDispatcher) {
+            parser = ParserUtil.getProObjectBodyParser(serviceName);
+            
+            msgType = controllerInput.getRequestMessageType();
+            
+            if(parser instanceof DefaultProObjectBodyParser) {
+                headerMsg = new com.tmax.proobject.model.context.HeaderMsgJson();
+                ((DefaultProObjectBodyParser)parser).setHeaderMsg(headerMsg);
+            }
+            header = ProObjectControllerUtil.unmarshalHeader(controllerInput.getHeaderBytes(), serviceName, requestContext, msgType, parser);
+            
+            if(parser instanceof DefaultProObjectBodyParser) {
+                dtoMsg = new com.tmax.custom.sample.dto.SampleDTOMsgJson();
+                ((DefaultProObjectBodyParser)parser).setInputMsg(dtoMsg);
+            }
+            svcInput = (com.tmax.custom.sample.dto.SampleDTO) ProObjectControllerUtil.unmarshalInput(controllerInput.getServiceInputBytes(), serviceName, requestContext, msgType, parser);
+        } else {
+            svcInput = (com.tmax.custom.sample.dto.SampleDTO) controllerInput.getServiceInputObject();
+        }
+        
+        ProObjectControllerUtil.handlePreService(serviceName, requestContext, svcInput); // getTransaction
+        
+        com.tmax.custom.sample.dto.SampleDTO svcOutput = null;
+        try {
+            validExecutor.execute(svcInput);
+            svcOutput = _MsCallPC.SoAppCall(svcInput);
             validExecutor.execute(svcOutput);
         } catch (Throwable e) {
             ProObjectControllerUtil.handleServiceError(serviceName, requestContext, svcInput, e, fromDispatcher); // rollback

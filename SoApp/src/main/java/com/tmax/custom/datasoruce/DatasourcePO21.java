@@ -5,7 +5,6 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,7 +22,7 @@ import com.tmax.proobject.service.persistence.mybatis.spring.ProObjectSqlSession
 @Configuration
 //@DependsOn("lazyInitializationBeanFactoryPostProcessorConfig")
 //@MapperScan(basePackages="com.tmax", annotationClass=DatabasePO21.class, sqlSessionFactoryRef="nonXaSqlSessionFactoryPO21", lazyInitialization = "TRUE")
-@MapperScan(basePackages="com.tmax", annotationClass=DatabasePO21.class, sqlSessionFactoryRef="nonXaSqlSessionFactoryPO21")
+@MapperScan(basePackages="com", annotationClass=DatabasePO21.class, sqlSessionFactoryRef="nonXaSqlSessionFactoryPO21")
 public class DatasourcePO21 {
 		
 		public ProObjectLogger logger = SystemLogger.getLogger();

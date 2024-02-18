@@ -1,5 +1,4 @@
-package com.tmax.custom.datasoruce;
-//package com.tmax.custom.datasource;
+//package com.tmax.custom.datasoruce;
 //
 //import javax.annotation.PostConstruct;
 //
